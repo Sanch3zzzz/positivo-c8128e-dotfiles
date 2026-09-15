@@ -1,0 +1,194 @@
+# Sway config - Positivo C8128E
+
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term foot
+set $menu wmenu-run
+set $browser floorp
+set $filemanager thunar
+
+# Output - tela interna
+output eDP-1 resolution 1366x768
+
+# Wallpaper
+exec_always ~/.local/bin/wallpaper-random.sh
+
+# Touchpad
+input type:touchpad {
+    dwt enabled
+    tap enabled
+    tap_button_map lrm
+    natural_scroll enabled
+    middle_emulation enabled
+    click_method clickfinger
+    scroll_method two_finger
+    accel_profile flat
+    pointer_accel 0.3
+}
+
+# Teclado BR
+input type:keyboard {
+    xkb_layout br
+    xkb_model abnt2
+}
+
+# Touchscreen (FocalTech FTSC1000)
+input type:touch {
+    map_to_output eDP-1
+    calibration_matrix 1.0 0.0 0.0 0.0 1.0 0.0
+}
+input type:tablet_tool {
+    map_to_output eDP-1
+}
+
+# Gestos de toque (daemon): tap = clique esquerdo, segurar = clique direito,
+# arrastar 1 dedo = swap, 2 dedos L/R = workspace
+exec_always python3 ~/.config/sway/scripts/touch-gestures.py
+
+# Fonte (retro pixel)
+font pango:JetBrainsMono Nerd Font Mono 10
+
+# Gaps e bordas
+gaps inner 4
+gaps outer 4
+default_border pixel 1
+
+# Tema - Dark Azul Vibrante
+set $bg      #0a1628
+set $bg-alt  #122442
+set $bg-hl   #1c3055
+set $fg      #ffffff
+set $fg-dim  #8aa2c9
+set $accent  #2f66a8
+set $accent2 #00d4ff
+set $urgent  #ff5555
+
+client.focused          $accent  $accent  $fg      $accent  $accent2
+client.focused_inactive $bg-hl   $bg-hl   $fg-dim  $bg-hl   $accent2
+client.unfocused         $bg-alt  $bg-alt  $fg-dim  $bg-alt  $accent2
+client.urgent            $urgent  $urgent  $fg      $urgent  $urgent
+
+# Keybinds - Basics
+bindsym $mod+t exec $term
+bindsym $mod+q kill
+bindsym $mod+space exec $menu
+bindsym $mod+Shift+e exec swaynag -t warning -m 'Sair do sway?' -B 'Sim' 'swaymsg exit'
+
+# Apps rapidos
+bindsym $mod+b exec $browser
+bindsym $mod+e exec $filemanager
+bindsym $mod+Print exec grim -g "$(slurp)" - | wl-copy
+
+# Floating
+floating_modifier $mod normal
+bindsym $mod+Shift+space focus mode_toggle
+
+# Layout
+bindsym $mod+h splith
+bindsym $mod+v splitv
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+f fullscreen
+bindsym $mod+a focus parent
+
+# Focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Mover janelas
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Redimensionar janela (MOD + Shift + Ctrl + setas)
+bindsym $mod+Shift+Ctrl+Left resize shrink width 10px
+bindsym $mod+Shift+Ctrl+Down resize grow height 10px
+bindsym $mod+Shift+Ctrl+Up resize shrink height 10px
+bindsym $mod+Shift+Ctrl+Right resize grow width 10px
+
+# Workspaces
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# Resize
+mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Reload
+bindsym $mod+Shift+c reload
+
+# Audio
+bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# Media
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioPause exec playerctl play-pause
+bindsym --locked XF86AudioPrev exec playerctl previous
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioStop exec playerctl stop
+
+# Teclado virtual na tela (wvkbd) - mod+k alterna
+bindsym $mod+k exec ~/.config/sway/scripts/toggle-osk.sh
+
+# Rotacao automatica da tela (giroscopio) - mod+o liga/desliga
+bindsym $mod+o exec ~/.config/sway/scripts/autorotate.sh
+
+# Tecla Copilot (fw emite Super+Shift+Search) -> abre o opencode
+bindsym $mod+Shift+XF86Search exec $term /home/gustavosp/.opencode/bin/opencode
+# Tecla Positivo (xkb 195 = FK17 -> XF86Launch8) -> print de tela inteira
+bindsym XF86Launch8 exec ~/.config/sway/scripts/screenshot-full.sh
+
+# Brightness
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+
+# Barra (waybar standalone). Usa `exec` (não `exec_always`): cada reload do sway
+# com exec_always vazava uma barra nova; `exec` sobe só 1x no start do sway.
+exec waybar
+
+# Mako notifications
+exec mako
+
+include /etc/sway/config.d/*

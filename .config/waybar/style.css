@@ -1,0 +1,136 @@
+* {
+    font-family: "JetBrainsMono Nerd Font Mono", sans-serif;
+    font-size: 12px;
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+}
+
+window#waybar {
+    background-color: #0a1628;
+    color: #ffffff;
+    border-bottom: 1px solid #2f66a8;
+}
+
+tooltip {
+    background-color: #122442;
+    border: 1px solid #2f66a8;
+    border-radius: 2px;
+}
+
+tooltip label {
+    color: #dfe6f0;
+}
+
+#custom-menu {
+    padding: 0 10px;
+    color: #00d4ff;
+    background-color: #122442;
+    font-size: 14px;
+    margin: 3px 0 3px 4px;
+}
+
+#custom-menu:hover {
+    background-color: #1c3055;
+    color: #ffffff;
+}
+
+#workspaces {
+    background-color: #122442;
+    padding: 0 4px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    color: #8aa2c9;
+    background: transparent;
+}
+
+#workspaces button.focused {
+    color: #ffffff;
+    background-color: #2f66a8;
+    font-weight: bold;
+}
+
+#workspaces button:hover {
+    background-color: #1c3055;
+    color: #00d4ff;
+}
+
+#window {
+    color: #8aa2c9;
+    padding: 0 10px;
+}
+
+#network, #clock, #cpu, #memory, #battery, #pulseaudio, #bluetooth, #custom-power {
+    padding: 0 10px;
+    color: #ffffff;
+    background-color: #122442;
+    margin: 3px 2px;
+}
+
+#network:hover, #pulseaudio:hover, #cpu:hover, #memory:hover, #battery:hover, #bluetooth:hover, #custom-power:hover {
+    background-color: #1c3055;
+}
+
+#clock {
+    margin-right: 4px;
+}
+
+#bluetooth {
+    color: #8aa2c9;
+}
+
+#bluetooth.on {
+    color: #00d4ff;
+}
+
+#bluetooth.off, #bluetooth.disabled {
+    color: #6a7fa0;
+}
+
+#network {
+    color: #8aa2c9;
+}
+
+#network.disconnected {
+    color: #ff5555;
+}
+
+#cpu {
+    color: #00d4ff;
+}
+
+#memory {
+    color: #4a9eff;
+}
+
+#pulseaudio {
+    color: #8aa2c9;
+}
+
+#pulseaudio.muted {
+    color: #6a7fa0;
+}
+
+#battery {
+    color: #8aa2c9;
+}
+
+#battery.warning {
+    color: #ffaa4a;
+}
+
+#battery.critical {
+    color: #ff5555;
+}
+
+#battery.charging {
+    color: #00d4ff;
+}
+
+#custom-power {
+    color: #4a9eff;
+}

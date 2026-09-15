@@ -1,0 +1,37 @@
+[Default Applications]
+x-scheme-handler/https=userapp-Floorp-PY6MV3.desktop
+x-scheme-handler/http=userapp-Floorp-PY6MV3.desktop
+text/html=userapp-Floorp-PY6MV3.desktop
+x-scheme-handler/chrome=userapp-Floorp-PY6MV3.desktop
+application/x-extension-htm=userapp-Floorp-PY6MV3.desktop
+application/x-extension-html=userapp-Floorp-PY6MV3.desktop
+application/x-extension-shtml=userapp-Floorp-PY6MV3.desktop
+application/xhtml+xml=userapp-Floorp-PY6MV3.desktop
+application/x-extension-xhtml=userapp-Floorp-PY6MV3.desktop
+application/x-extension-xht=userapp-Floorp-PY6MV3.desktop
+text/plain=micro.desktop
+image/png=imv.desktop
+video/mp4=vlc.desktop
+application/epub+zip=com.github.johnfactotum.Foliate.desktop
+application/x-mobipocket-ebook=com.github.johnfactotum.Foliate.desktop
+application/vnd.amazon.mobi8-ebook=com.github.johnfactotum.Foliate.desktop
+application/x-fictionbook+xml=com.github.johnfactotum.Foliate.desktop
+application/vnd.comicbook+zip=com.github.johnfactotum.Foliate.desktop
+
+[Added Associations]
+x-scheme-handler/http=userapp-Floorp-PY6MV3.desktop;
+x-scheme-handler/https=userapp-Floorp-PY6MV3.desktop;
+x-scheme-handler/chrome=userapp-Floorp-PY6MV3.desktop;
+text/html=userapp-Floorp-PY6MV3.desktop;
+application/x-extension-htm=userapp-Floorp-PY6MV3.desktop;
+application/x-extension-html=userapp-Floorp-PY6MV3.desktop;
+application/x-extension-shtml=userapp-Floorp-PY6MV3.desktop;
+application/xhtml+xml=userapp-Floorp-PY6MV3.desktop;
+application/x-extension-xhtml=userapp-Floorp-PY6MV3.desktop;
+application/x-extension-xht=userapp-Floorp-PY6MV3.desktop;
+text/plain=vim.desktop;micro.desktop;
+application/epub+zip=com.github.johnfactotum.Foliate.desktop;
+application/x-mobipocket-ebook=com.github.johnfactotum.Foliate.desktop;
+application/vnd.amazon.mobi8-ebook=com.github.johnfactotum.Foliate.desktop;
+application/x-fictionbook+xml=com.github.johnfactotum.Foliate.desktop;
+application/vnd.comicbook+zip=com.github.johnfactotum.Foliate.desktop;

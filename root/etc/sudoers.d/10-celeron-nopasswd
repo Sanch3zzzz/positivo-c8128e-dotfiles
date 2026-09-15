@@ -1,0 +1,3 @@
+# Requerido pelos scripts de energia (power-menu.sh) que escrevem em
+# /sys/devices/system/cpu/cpufreq/policy*/
+%wheel ALL=(ALL:ALL) NOPASSWD: ALL

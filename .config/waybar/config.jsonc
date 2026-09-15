@@ -1,0 +1,105 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 4,
+    "modules-left": ["custom/menu", "sway/workspaces"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["network", "bluetooth", "pulseaudio", "cpu", "memory", "backlight", "battery", "custom/power", "clock"],
+    "custom/menu": {
+        "format": "\uf0c9",
+        "on-click": "wmenu-run",
+        "tooltip": false,
+        "interval": "once"
+    },
+    "sway/workspaces": {
+        "format": "{name}",
+        "format-icons": {
+            "1": "\uf268",
+            "2": "\uf0ac",
+            "3": "\uf07b",
+            "4": "\uf249",
+            "5": "\uf1b2",
+            "6": "\uf120",
+            "7": "\uf11b",
+            "8": "\uf007",
+            "9": "\uf03e"
+        }
+    },
+    "sway/window": {
+        "format": "{}",
+        "max-length": 50
+    },
+    "network": {
+        "format-wifi": "{icon} {essid}",
+        "format-ethernet": "{ifname}",
+        "format-disconnected": "\uf071",
+        "format-icons": ["\uf1eb", "\uf1eb", "\uf1eb"],
+        "tooltip-format": "{ifname}\nIP: {ipaddr}\n{essid} ({signalStrength}%)",
+        "on-click": "~/.config/waybar/scripts/network-menu.sh",
+        "on-click-right": "~/.config/waybar/scripts/network-menu.sh disconnect"
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "\uf026 Mudo",
+        "format-icons": {
+            "default": ["\uf026", "\uf027", "\uf028"]
+        },
+        "tooltip-format": "{desc} | {volume}%",
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-click-right": "~/.config/waybar/scripts/audio-menu.sh",
+        "on-scroll-up": "~/.config/waybar/scripts/vol-step.sh up",
+        "on-scroll-down": "~/.config/waybar/scripts/vol-step.sh down"
+    },
+    "clock": {
+        "format": " {:%H:%M}",
+        "format-alt": " {:%d/%m/%Y}",
+        "tooltip": true
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "max-length": 15
+    },
+    "memory": {
+        "format": " {percentage}%",
+        "max-length": 15
+    },
+    "backlight": {
+        "format": "{percent}% {icon}",
+        "format-icons": ["\ue312", "\ue313", "\ue314", "\ue315", "\ue316", "\ue317", "\ue318", "\ue319", "\ue31a"],
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-"
+    },
+    "bluetooth": {
+        "format": "{status}",
+        "format-on": "\uf293",
+        "format-off": "\uf293",
+        "format-disabled": "",
+        "format-connected": "\uf294 {device_alias}",
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh",
+        "on-click-right": "bluetoothctl power off",
+        "on-click-middle": "bluetoothctl power on"
+    },
+    "custom/power": {
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/power-menu.sh status",
+        "signal": 3,
+        "interval": 10,
+        "tooltip": true,
+        "on-click": "~/.config/waybar/scripts/power-menu.sh menu",
+        "on-click-right": "~/.config/waybar/scripts/power-menu.sh cycle"
+    },
+    "battery": {
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-icons": ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"],
+        "format-charging-full": "\uf0e7 {capacity}%",
+        "states": {
+            "warning": 30,
+            "critical": 15
+        }
+    }
+}

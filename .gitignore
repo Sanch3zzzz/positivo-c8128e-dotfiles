@@ -1,0 +1,12 @@
+# protege contra segredos que podem acabar na pasta por engano
+headers.txt
+config.applied.toml
+config.toml
+
+# backups criados pelo install.sh
+*.bak.*
+
+# lixo do python / build
+__pycache__/
+*.pyc
+target/
