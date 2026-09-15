@@ -93,3 +93,45 @@ Caso gire pro lado errado, inverta `90` e `270` no `map_orient()` do script.
 
 `~/.config/sway/scripts/toggle-osk.sh`, atalho **`MOD + k`**. Alterna liga/
 desliga do `wvkbd-mobintl` (ATIVO: instale `wvkbd`).
+
+## 3.6 · Drag de janela com mouse/touchpad
+
+Mesma ideia do gesto de arrastar, mas acionado por **`MOD + botão 1`
+arrastar** — funciona em touchpad (físico) e mouse.
+
+- Em janela **tiled**: a janela vira "fantasma" seguindo o cursor; ao
+  **soltar** faz **swap** com a janela sob o cursor (mesmo workspace).
+- Em janela já **flutuante**: move livremente (sem swap).
+
+Script: `~/.config/sway/scripts/drag-window.py`, binds no sway config
+(`~/.config/sway/config`):
+
+```
+bindsym --whole-window $mod+Button1 exec ~/.config/sway/scripts/drag-window.py start
+bindsym --whole-window --release $mod+Button1 exec ~/.config/sway/scripts/drag-window.py end
+```
+
+### Por que no sway 1.12
+
+- O IPC **não expõe a posição absoluta do cursor** (`get_seats` só tem
+  name/capabilities/focus/devices), então o fantasma é movido por
+  **deslocamento** lido do evdev: touchpad ABS normalizado para 1366x768
+  (X 0–1260 / 720 → `pos * 1366/1260`, etc.) e mouse REL.
+- O **`floating_modifier` nativo foi removido**: o drag nativo do sway
+  engolia o evento de soltar (a janela ficava flutuante). O script cuida de
+  tudo.
+- O "soltar" é detectado por **duas vias**: o bind `--release` (escreve
+  `/tmp/sway-drag-window.stop`) **ou** o `BTN_LEFT = 0` físico lido no evdev
+  (root via `sudo -n`).
+- **Swap só com movimento real (≥ 30px)**: `MOD + clique` seco na janela não
+  reordena nada — só re-flutua e re-tila no lugar.
+
+### Detalhes de implementação
+
+- Flutuante no `get_tree` é nó `floating_con` (não `con`) — as funções de
+  buscas tratam os dois (`WIN_TYPES`).
+- Antes de dar `floating enable` o script grava o **centro original** em
+  `/tmp/sway-drag-window.state` (`nid mode cx cy`); no final compara com o
+  centro final p/ decidir swap; o alvo é a **menor** janela que contém o
+  centro do fantasma (`leaf_containing`).
+- Log: `/tmp/sway-drag-window.log` (erros e motivo do fim do drag).

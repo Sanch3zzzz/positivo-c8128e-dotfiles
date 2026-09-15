@@ -65,7 +65,9 @@ Ou manualmente, seguindo o `docs/` na ordem. O guia completo começa na
 | `MOD + b` / `MOD + e` | Navegador (Floorp) / Arquivos (Thunar) |
 | `MOD + q` | Fecha janela |
 | `MOD + shift + setas` | Move janela |
+| `MOD + shift + i/j/k/l` | Move janela (i=up, k=down, j=left, l=right) |
 | `MOD + shift + ctrl + setas` | Redimensiona (10px) |
+| `MOD + arrastar` (btn esq.) | Drag real: reordena janela no tiling (swap) ou move flutuante |
 | `MOD + h/v/s/w` | Layout split H/V, stacked, tabbed |
 | `MOD + 1..0` | Vai ao workspace 1-10 |
 | `MOD + shift + 1..0` | Move janela ao workspace 1-10 |

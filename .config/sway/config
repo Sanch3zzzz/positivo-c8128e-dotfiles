@@ -82,8 +82,7 @@ bindsym $mod+b exec $browser
 bindsym $mod+e exec $filemanager
 bindsym $mod+Print exec grim -g "$(slurp)" - | wl-copy
 
-# Floating
-floating_modifier $mod normal
+# Floating (drag de flutuante e controlado pelo drag-window.py, MOD + arrastar)
 bindsym $mod+Shift+space focus mode_toggle
 
 # Layout
@@ -105,6 +104,18 @@ bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
+
+# Mover janelas com ijkl (estilo seta invertida: i=up, k=down, j=left, l=right)
+bindsym $mod+Shift+i move up
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+l move right
+
+# Arrastar janela com o mouse (MOD + arrastar) - reordena via swap no tiling.
+# NAO usa floating_modifier: o drag nativo do sway engole o release e o
+# script (drag-window.py) cuida de tudo (flutuante e tiled).
+bindsym --whole-window $mod+Button1 exec ~/.config/sway/scripts/drag-window.py start
+bindsym --whole-window --release $mod+Button1 exec ~/.config/sway/scripts/drag-window.py end
 
 # Redimensionar janela (MOD + Shift + Ctrl + setas)
 bindsym $mod+Shift+Ctrl+Left resize shrink width 10px
