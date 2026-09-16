@@ -73,6 +73,7 @@ Ou manualmente, seguindo o `docs/` na ordem. O guia completo começa na
 | `MOD + 1..0` | Vai ao workspace 1-10 |
 | `MOD + shift + 1..0` | Move janela ao workspace 1-10 |
 | `MOD + Print` | Screenshot de área (clipboard) |
+| `MOD + v` | Histórico da área de transferência (cliphist) |
 | Tecla `Positivo` | Print de tela inteira → `~/Images/Prints/` |
 | `MOD + o` | Liga/desliga rotação automática (giroscópio) |
 | `MOD + k` | Teclado virtual (wvkbd) |

@@ -11,6 +11,13 @@ sudo pacman -S --needed \
     noto-fonts ttf-dejavu ttf-jetbrains-mono-nerd
 ```
 
+O `wl-clipboard` fornece os comandos `wl-copy`/`wl-paste` (clipboard do
+Wayland). Para **histórico da área de transferência**, instale também:
+
+```bash
+sudo pacman -S cliphist
+```
+
 ## 2.2 · seatd (permissões de sessão)
 
 ```bash
@@ -105,6 +112,17 @@ wpctl status
 Ao ligar, digite usuário (`gustavosp`) e senha na tela de login (tuigreet)
 e o sway abre. Atalho para abrir o terminal: **`MOD + t`** (foot). Sair do
 sway (`MOD + Shift + e`) volta para a tela de login.
+
+### Área de transferência com histórico (cliphist)
+
+O `cliphist` guarda tudo que você copiar (texto e imagem):
+
+- Daemon: `exec wl-paste --watch cliphist store` — roda no init do sway e
+  vai acumulando o histórico em `~/.cache/cliphist/db`.
+- Atalho **`MOD + v`**: abre o histórico num `wmenu`, escolhe um item e ele
+  é copiado de volta pro clipboard (`cliphist list | wmenu | cliphist
+  decode | wl-copy`).
+- Limpar o histórico se quiser: `cliphist wipe`.
 
 ### Ajustes manuais únicos que não estão nos dotfiles
 

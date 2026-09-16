@@ -82,6 +82,10 @@ bindsym $mod+b exec $browser
 bindsym $mod+e exec $filemanager
 bindsym $mod+Print exec grim -g "$(slurp)" - | wl-copy
 
+# Area de transferencia com historico (cliphist)
+exec wl-paste --watch cliphist store
+bindsym $mod+v exec "cliphist list | wmenu -p 'Copiar:' | cliphist decode | wl-copy"
+
 # Floating (drag de flutuante e controlado pelo drag-window.py, MOD + arrastar)
 bindsym $mod+Shift+space focus mode_toggle
 # Re-tile: joga todas as janelas flutuantes de volta pro layout tiled
