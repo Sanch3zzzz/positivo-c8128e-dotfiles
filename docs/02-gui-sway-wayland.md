@@ -49,13 +49,37 @@ cd positivo-c8128e-dotfiles
 sudo ./install.sh --root     # arquivos de sistema (start-sway, logind, sudoers)
 ```
 
-## 2.5 · Alias para iniciar o sway (grupo seat)
+## 2.5 · Tela de login ao ligar (greetd + tuigreet)
 
-No `~/.bashrc`:
+O sway agora sobe por um **display manager minimalista** (greetd + greeter
+tuigreet em TUI): ao ligar o notebook cai direto na tela de login no VT 1 e,
+após autenticar, roda `/usr/local/bin/start-sway` e abre a sessão Wayland.
 
 ```bash
-alias sway='exec newgrp seat -c /usr/bin/sway'
+sudo pacman -S greetd greetd-tuigreet
+sudo systemctl enable --now greetd.service
 ```
+
+Config: `root/etc/greetd/config.toml` (copiado por `./install.sh --root`):
+
+```toml
+[terminal]
+vt = 1
+
+[default_session]
+command = "tuigreet --time --cmd /usr/local/bin/start-sway"
+user = "greeter"
+
+# [initial_session]
+# command = "/usr/local/bin/start-sway"
+# user = "gustavosp"
+```
+
+- `--time` mostra o relógio na tela de login; `--cmd` define o que rodar
+  após o login.
+- `[initial_session]` comentado **exige senha em toda inicialização**;
+  descomente se quiser autologin.
+- O usuário `greeter` (uid/gid 966) é criado pelo próprio pacote.
 
 O `/usr/local/bin/start-sway` exporta as variáveis de sessão Wayland e o
 `TERMINAL=foot` (usado por apps com `Terminal=true`). Depois de instalar,
@@ -63,6 +87,10 @@ deslogue/relogue uma vez para o `TERMINAL` valer na sessão.
 
 > No config deste repo o sway inicia o waybar com `exec` (não
 > `exec_always`) para não vazar uma barra nova a cada reload do sway.
+
+> **Manual (opcional):** o alias `sway` no `~/.bashrc` ainda funciona para
+> subir em um TTY manual (ex.: `Ctrl+Alt+F2`):
+> `alias sway='exec newgrp seat -c /usr/bin/sway'`
 
 ## 2.6 · Áudio
 
@@ -74,7 +102,9 @@ wpctl status
 
 ## 2.7 · Primeiro boot do sway
 
-No TTY, digite `sway`. Atalho para abrir o terminal: **`MOD + t`** (foot).
+Ao ligar, digite usuário (`gustavosp`) e senha na tela de login (tuigreet)
+e o sway abre. Atalho para abrir o terminal: **`MOD + t`** (foot). Sair do
+sway (`MOD + Shift + e`) volta para a tela de login.
 
 ### Ajustes manuais únicos que não estão nos dotfiles
 

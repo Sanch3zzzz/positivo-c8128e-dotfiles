@@ -1,7 +1,7 @@
 # protege contra segredos que podem acabar na pasta por engano
-headers.txt
-config.applied.toml
-config.toml
+# (config do ytermusic NUNCA pode ir pro repo, mesmo se copiada pra ca)
+**/ytermusic/headers.txt
+**/ytermusic/config.toml
 
 # backups criados pelo install.sh
 *.bak.*

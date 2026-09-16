@@ -1,0 +1,24 @@
+# Tela de login ao ligar o notebook (greetd + tuigreet).
+# Instale os pacotes antes:
+#   sudo pacman -S greetd greetd-tuigreet
+#   sudo systemctl enable --now greetd.service
+
+[terminal]
+# O VT onde o greeter roda. Pode ser "next", "current" ou um numero.
+vt = 1
+
+# A sessao "padrao", tambem chamada de greeter (tela de login).
+[default_session]
+
+# `tuigreet` e um greeter em TUI. Mostra user/senha + relogio (--time)
+# e apos o login roda o comando (--cmd) start-sway (sessao Wayland).
+command = "tuigreet --time --cmd /usr/local/bin/start-sway"
+
+# Usuario com que o greeter roda (criado pelo pacote greetd).
+user = "greeter"
+
+# A sessao iniciada automaticamente no boot SEM pedir credenciais.
+# Descomente para virar autologin (sem senha em toda inicializacao).
+# [initial_session]
+# command = "/usr/local/bin/start-sway"
+# user = "gustavosp"

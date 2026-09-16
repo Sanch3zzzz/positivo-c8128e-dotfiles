@@ -63,6 +63,7 @@ if [ "$WANT_ROOT" -eq 1 ]; then
     echo "== Arquivos de sistema (sudo) =="
     backup_copy "$HERE/root/usr/local/bin/start-sway" /usr/local/bin/start-sway
     chmod +x /usr/local/bin/start-sway
+    backup_copy "$HERE/root/etc/greetd/config.toml" /etc/greetd/config.toml
     backup_copy "$HERE/root/etc/systemd/logind.conf.d/power-button.conf" \
         /etc/systemd/logind.conf.d/power-button.conf
     backup_copy "$HERE/root/etc/sudoers.d/10-celeron-nopasswd" \
