@@ -157,6 +157,15 @@ Também há **`MOD + shift + f`**: joga **todas** as janelas flutuantes de volta
 ao layout tiled (`[floating] floating disable`). Útil quando o drag-window.py
 ou algum app deixa janela solta por engano.
 
+**Pegadinha (testado):** o sway NÃO remove aspas no `bindsym`. 
+`bindsym $mod+Shift+f '[floating] floating disable'` (com aspas) vira um
+comando inválido e **nada acontece** — o binding nem roda. Tem que ser **sem**
+aspas: `bindsym $mod+Shift+f [floating] floating disable`. O `[floating]` no
+início do comando funciona porque o sway considera o resto da linha como o
+comando. O mesmo bug atingia o `MOD + Shift + e` (swaynag do logout), que usava
+aspas simples `'Sair do sway?'`; trocado para aspas duplas `"Sair do sway?"`
+(e o sway as remove no `exec`).
+
 ## 2.9 · Waybar standalone
 
 O waybar sobe via `exec waybar` no config do sway (não usa o bar do sway).

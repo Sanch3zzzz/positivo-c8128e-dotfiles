@@ -75,7 +75,7 @@ client.urgent            $urgent  $urgent  $fg      $urgent  $urgent
 bindsym $mod+t exec $term
 bindsym $mod+q kill
 bindsym $mod+space exec $menu
-bindsym $mod+Shift+e exec swaynag -t warning -m 'Sair do sway?' -B 'Sim' 'swaymsg exit'
+bindsym $mod+Shift+e exec swaynag -t warning -m "Sair do sway?" -B "Sim" "swaymsg exit"
 
 # Apps rapidos
 bindsym $mod+b exec $browser
@@ -88,8 +88,9 @@ bindsym $mod+Shift+v exec "cliphist list | wmenu -p 'Copiar:' | cliphist decode 
 
 # Floating (drag de flutuante e controlado pelo drag-window.py, MOD + arrastar)
 bindsym $mod+Shift+space focus mode_toggle
-# Re-tile: joga todas as janelas flutuantes de volta pro layout tiled
-bindsym $mod+Shift+f '[floating] floating disable'
+# Re-tile: joga todas as janelas flutuantes de volta pro layout tiled.
+# SEM aspas: o sway NAO remove quotes no bindsym (com aspas vira comando invalido)
+bindsym $mod+Shift+f [floating] floating disable
 
 # Layout
 bindsym $mod+h splith
