@@ -68,6 +68,7 @@ Ou manualmente, seguindo o `docs/` na ordem. O guia completo começa na
 | `MOD + shift + i/j/k/l` | Move janela (i=up, k=down, j=left, l=right) |
 | `MOD + shift + ctrl + setas` | Redimensiona (10px) |
 | `MOD + arrastar` (btn esq.) | Drag real: reordena janela no tiling (swap) ou move flutuante |
+| `MOD + shift + f` | Joga todas as janelas flutuantes de volta ao tiling |
 | `MOD + h/v/s/w` | Layout split H/V, stacked, tabbed |
 | `MOD + 1..0` | Vai ao workspace 1-10 |
 | `MOD + shift + 1..0` | Move janela ao workspace 1-10 |
@@ -75,6 +76,7 @@ Ou manualmente, seguindo o `docs/` na ordem. O guia completo começa na
 | Tecla `Positivo` | Print de tela inteira → `~/Images/Prints/` |
 | `MOD + o` | Liga/desliga rotação automática (giroscópio) |
 | `MOD + k` | Teclado virtual (wvkbd) |
+| `MOD + grave` | Terminal escorregadio (scratchpad) abre/fecha |
 | Tecla `Copilot` | Abre o opencode |
 
 Nota: as teclas `Positivo` e `Copilot` são exclusivas desse notebook. Ver

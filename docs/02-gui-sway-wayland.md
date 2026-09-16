@@ -112,7 +112,20 @@ sway (`MOD + Shift + e`) volta para a tela de login.
   `accel_profile flat` + `pointer_accel 0.3`, `tap_button_map lrm`. Sinta e
   ajuste em `~/.config/sway/config`.
 
-## 2.8 · Waybar standalone
+## 2.8 · Terminal escorregadio (scratchpad)
+
+Atalho **`MOD + grave`** abre/fecha um foot "escorregadio" sobre as janelas
+(estilo Guake/yakuake), usando o scratchpad nativo do sway.
+
+- Script: `~/.config/sway/scripts/toggle-scratchpad.sh`
+- Se nenhuma janela scratchpad existe, ele cria um `foot --app_id scratchpad`
+  e manda pro scratchpad; se já existe, alterna entre mostrar e esconder.
+
+Também há **`MOD + shift + f`**: joga **todas** as janelas flutuantes de volta
+ao layout tiled (`[floating] floating disable`). Útil quando o drag-window.py
+ou algum app deixa janela solta por engano.
+
+## 2.9 · Waybar standalone
 
 O waybar sobe via `exec waybar` no config do sway (não usa o bar do sway).
 Se quiser recarregar a barra após editar:
