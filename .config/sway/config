@@ -49,7 +49,7 @@ input type:tablet_tool {
 exec_always python3 ~/.config/sway/scripts/touch-gestures.py
 
 # Fonte (retro pixel)
-font pango:JetBrainsMono Nerd Font Mono 10
+font pango:JetBrainsMono Nerd Font Mono 14
 
 # Gaps e bordas
 gaps inner 4
