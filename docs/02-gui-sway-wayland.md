@@ -136,8 +136,17 @@ Atalho **`MOD + grave`** abre/fecha um foot "escorregadio" sobre as janelas
 (estilo Guake/yakuake), usando o scratchpad nativo do sway.
 
 - Script: `~/.config/sway/scripts/toggle-scratchpad.sh`
-- Se nenhuma janela scratchpad existe, ele cria um `foot --app_id scratchpad`
+- Se nenhuma janela scratchpad existe, ele cria um `foot --app-id scratchpad`
   e manda pro scratchpad; se já existe, alterna entre mostrar e esconder.
+- **Pegadinhas (testado):**
+  - O flag do foot é `--app-id` (com hífen). `--app_id` NÃO existe e o foot
+    aborta com "unrecognized option".
+  - A detecção NÃO pode ser `swaymsg -t get_tree | grep '"app_id":"scratchpad"'`:
+    o JSON do sway é indentado (`"app_id": "scratchpad"`, com espaço) e o grep
+    nunca casa, fazendo abrir um foot NOVO a cada tecla. Solução robusta: usar
+    o exit code do próprio swaymsg — `swaymsg -q "[app_id=scratchpad]
+    scratchpad show"` retorna 0 se existe (e alterna mostrar/esconder) e 2 se
+    não existe (cria).
 
 Também há **`MOD + shift + f`**: joga **todas** as janelas flutuantes de volta
 ao layout tiled (`[floating] floating disable`). Útil quando o drag-window.py
