@@ -32,7 +32,8 @@ mas quase tudo reaproveitável em qualquer notebook com touchscreen.
 ├── README.md
 ├── install.sh                 # copia tudo pro lugar (com backup)
 ├── docs/
-│   ├── 01-instalacao-arch.md  # Arch do zero (particionamento, base, boot)
+│   ├── 00-pacotes.md            # checklist: tudo que precisa instalar
+│   ├── 01-instalacao-arch.md    # Arch do zero (particionamento, base, boot)
 │   ├── 02-gui-sway-wayland.md # seatd, sway, foot, waybar, mako, audio
 │   ├── 03-gestos-touch.md     # daemon de gestos + ydotool + rotação
 │   ├── 04-hardware-extras.md  # BT, energia, relógio, teclas extras
