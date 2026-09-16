@@ -119,7 +119,7 @@ O `cliphist` guarda tudo que você copiar (texto e imagem):
 
 - Daemon: `exec wl-paste --watch cliphist store` — roda no init do sway e
   vai acumulando o histórico em `~/.cache/cliphist/db`.
-- Atalho **`MOD + v`**: abre o histórico num `wmenu`, escolhe um item e ele
+- Atalho **`MOD + Shift + v`**: abre o histórico num `wmenu`, escolhe um item e ele
   é copiado de volta pro clipboard (`cliphist list | wmenu | cliphist
   decode | wl-copy`).
 - Limpar o histórico se quiser: `cliphist wipe`.
