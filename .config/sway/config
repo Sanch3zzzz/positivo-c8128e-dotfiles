@@ -84,6 +84,8 @@ bindsym $mod+Print exec grim -g "$(slurp)" - | wl-copy
 
 # Floating (drag de flutuante e controlado pelo drag-window.py, MOD + arrastar)
 bindsym $mod+Shift+space focus mode_toggle
+# Re-tile: joga todas as janelas flutuantes de volta pro layout tiled
+bindsym $mod+Shift+f '[floating] floating disable'
 
 # Layout
 bindsym $mod+h splith
@@ -182,6 +184,9 @@ bindsym --locked XF86AudioStop exec playerctl stop
 
 # Teclado virtual na tela (wvkbd) - mod+k alterna
 bindsym $mod+k exec ~/.config/sway/scripts/toggle-osk.sh
+
+# Terminal escorregadio (scratchpad) - mod+grave abre/fecha
+bindsym $mod+grave exec ~/.config/sway/scripts/toggle-scratchpad.sh
 
 # Rotacao automatica da tela (giroscopio) - mod+o liga/desliga
 bindsym $mod+o exec ~/.config/sway/scripts/autorotate.sh
