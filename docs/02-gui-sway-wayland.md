@@ -132,13 +132,18 @@ O `cliphist` guarda tudo que você copiar (texto e imagem):
 
 ## 2.8 · Terminal escorregadio (scratchpad)
 
-Atalho **`MOD + grave`** abre/fecha um foot "escorregadio" sobre as janelas
+Atalho **`MOD + '`** abre/fecha um foot "escorregadio" sobre as janelas
 (estilo Guake/yakuake), usando o scratchpad nativo do sway.
 
 - Script: `~/.config/sway/scripts/toggle-scratchpad.sh`
 - Se nenhuma janela scratchpad existe, ele cria um `foot --app-id scratchpad`
   e manda pro scratchpad; se já existe, alterna entre mostrar e esconder.
 - **Pegadinhas (testado):**
+  - O atalho é `$mod+apostrophe`, NÃO `$mod+grave`. `grave` (a crase `` ` ``) é
+    US-cêntrico: no layout BR/ABNT2 esse keysym só existe no **AltGr+Shift** da
+    tecla à direita do P, então `MOD+grave` nunca dispara na prática. A tecla à
+    esquerda do `1` (posição do backtick no US) no ABNT2 produz `apostrophe`
+    (`'`/`"`), sem Shift — por isso é ela que funciona.
   - O flag do foot é `--app-id` (com hífen). `--app_id` NÃO existe e o foot
     aborta com "unrecognized option".
   - A detecção NÃO pode ser `swaymsg -t get_tree | grep '"app_id":"scratchpad"'`:

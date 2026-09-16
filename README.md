@@ -78,7 +78,7 @@ Ou manualmente, seguindo o `docs/` na ordem. O guia completo começa na
 | Tecla `Positivo` | Print de tela inteira → `~/Images/Prints/` |
 | `MOD + o` | Liga/desliga rotação automática (giroscópio) |
 | `MOD + k` | Teclado virtual (wvkbd) |
-| `MOD + grave` | Terminal escorregadio (scratchpad) abre/fecha |
+| `MOD + '` | Terminal escorregadio (scratchpad) abre/fecha (tecla esquerda do 1) |
 | Tecla `Copilot` | Abre o opencode |
 
 Nota: as teclas `Positivo` e `Copilot` são exclusivas desse notebook. Ver

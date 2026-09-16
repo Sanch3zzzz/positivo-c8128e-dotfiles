@@ -189,8 +189,9 @@ bindsym --locked XF86AudioStop exec playerctl stop
 # Teclado virtual na tela (wvkbd) - mod+k alterna
 bindsym $mod+k exec ~/.config/sway/scripts/toggle-osk.sh
 
-# Terminal escorregadio (scratchpad) - mod+grave abre/fecha
-bindsym $mod+grave exec ~/.config/sway/scripts/toggle-scratchpad.sh
+# Terminal escorregadio (scratchpad) - mod+' abre/fecha (tecla a esquerda do 1;
+# no ABNT2 nao existe keysym 'grave' simples, so em AltGr+Shift)
+bindsym $mod+apostrophe exec ~/.config/sway/scripts/toggle-scratchpad.sh
 
 # Rotacao automatica da tela (giroscopio) - mod+o liga/desliga
 bindsym $mod+o exec ~/.config/sway/scripts/autorotate.sh
