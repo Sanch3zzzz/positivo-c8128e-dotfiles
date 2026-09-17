@@ -97,5 +97,8 @@ Detalhes, limiares e pegadinhas: [docs/03-gestos-touch.md](docs/03-gestos-touch.
 
 ## Screenshots
 
-Sem capturas por enquanto — o tema é **Dark Azul Vibrante** (`#0a1628` de
-fundo, acento `#2f66a8`), fonte JetBrainsMono Nerd Font.
+Tema **Dark Azul Vibrante** (fundo `#0a1628`, acento `#2f66a8`), fonte
+JetBrainsMono Nerd Font. Capturas reais tiradas no aparelho:
+
+- [Desktop com floorp e thunar no tiling](docs/screenshots/desktop-tiling-floorp-thunar.png)
+- [Terminal com fastfetch](docs/screenshots/terminal-fastfetch.png)
