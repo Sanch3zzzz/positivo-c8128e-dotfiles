@@ -94,6 +94,17 @@ Caso gire pro lado errado, inverta `90` e `270` no `map_orient()` do script.
 `~/.config/sway/scripts/toggle-osk.sh`, atalho **`MOD + k`**. Alterna liga/
 desliga do `wvkbd-mobintl` (ATIVO: instale `wvkbd`).
 
+Como o teclado virtual **não tem tecla MOD**, há também um **botão na
+waybar** (módulo `custom/osk`, ícone de teclado, ao lado do bluetooth)
+que chama o mesmo script. O toggle usa sinais determinísticos do wvkbd
+(`SIGUSR1` esconde / `SIGUSR2` mostra) e mantém um marcador de estado em
+`/tmp/wvkbd-visible`, para `MOD + k` e o botão ficarem consistentes.
+
+Pegadinha: usar `pkill -RTMIN` (toggle) + `pgrep` não serve pra saber se
+está visível — o wvkbd continua vivo quando escondido. E no waybar, botão
+com `exec` sem `interval` fica re-executando o script em loop (derruba a
+barra num Celeron); preferir botão fixo (`format` + `on-click`).
+
 ## 3.6 · Drag de janela com mouse/touchpad
 
 Mesma ideia do gesto de arrastar, mas acionado por **`MOD + botão 1`

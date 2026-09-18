@@ -5,7 +5,7 @@
     "spacing": 4,
     "modules-left": ["custom/menu", "sway/workspaces"],
     "modules-center": ["sway/window"],
-    "modules-right": ["network", "bluetooth", "pulseaudio", "cpu", "memory", "backlight", "battery", "custom/power", "clock"],
+    "modules-right": ["network", "bluetooth", "custom/osk", "pulseaudio", "cpu", "memory", "backlight", "battery", "custom/power", "clock"],
     "custom/menu": {
         "format": "\uf0c9",
         "on-click": "wmenu-run",
@@ -38,6 +38,11 @@
         "tooltip-format": "{ifname}\nIP: {ipaddr}\n{essid} ({signalStrength}%)",
         "on-click": "~/.config/waybar/scripts/network-menu.sh",
         "on-click-right": "~/.config/waybar/scripts/network-menu.sh disconnect"
+    },
+    "custom/osk": {
+        "format": "\uf11c",
+        "on-click": "~/.config/sway/scripts/toggle-osk.sh",
+        "tooltip": "Teclado virtual (abrir/fechar)"
     },
     "pulseaudio": {
         "format": "{icon} {volume}%",

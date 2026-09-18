@@ -77,7 +77,7 @@ Ou manualmente, seguindo o `docs/` na ordem. O guia completo começa na
 | `MOD + Shift + v` | Histórico da área de transferência (cliphist) |
 | Tecla `Positivo` | Print de tela inteira → `~/Images/Prints/` |
 | `MOD + o` | Liga/desliga rotação automática (giroscópio) |
-| `MOD + k` | Teclado virtual (wvkbd) |
+| `MOD + k` | Teclado virtual (wvkbd) — ou pelo botão na waybar (ícone de teclado) |
 | `MOD + '` | Terminal escorregadio (scratchpad) abre/fecha (tecla esquerda do 1) |
 | Tecla `Copilot` | Abre o opencode |
 
