@@ -65,6 +65,28 @@ Compilar do git master (a versão AUR `ytermusic-bin` está quebrada por 403 do
 Google). Precisa de `cargo` (~15 min no Celeron N4500) e autenticação via
 `headers.txt` (cookie — **não** versionado no repo).
 
+## 9 · Manuseio de arquivos no Thunar (compactados/thumbnails/volumes)
+
+```bash
+sudo pacman -S ark tumbler thunar-volman gvfs gvfs-mtp gvfs-smb \
+    p7zip unzip thunar-media-tags-plugin \
+    poppler-glib ffmpegthumbnailer \
+    qt6ct
+```
+
+- `ark` = handler de extração do `thunar-archive-plugin` (botão direito:
+  "Extrair aqui"/"Criar arquivo"). Associações MIME em
+  `.config/mimeapps.list` já apontam os compactados para `org.kde.ark.desktop`.
+- `tumbler` (+ `poppler-glib` p/ PDF e `ffmpegthumbnailer` p/ vídeo) =
+  miniaturas no Thunar. Reinicie `systemctl --user restart tumblerd.service`
+  se instalar os opcionais depois.
+- `thunar-volman` (+ `udisks2`, vêm juntos) = auto-montar USB/dispositivos.
+- `gvfs` + `gvfs-mtp` (celular Android) + `gvfs-smb` (pastas Windows/rede).
+- `thunar-media-tags-plugin` = editar tags de áudio nas Propriedades.
+- `qt6ct` = tema escuro p/ apps Qt/KDE (Ark). Config já no repo
+  (`.config/qt6ct/qt6ct.conf` com esquema `darker`); env
+  `QT_QPA_PLATFORMTHEME=qt6ct` exportada no `start-sway`.
+
 ---
 
 **Nota:** o `install.sh` **não instala pacotes** — só copia configs. Depois de

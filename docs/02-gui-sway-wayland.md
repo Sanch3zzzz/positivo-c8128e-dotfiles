@@ -184,3 +184,71 @@ Estrutura (config/scripts) no repo:
   `bluetooth-menu.sh`, `power-menu.sh`, `vol-step.sh`
 
 Continuação: [03 · gestos de toque](03-gestos-touch.md).
+
+## 2.10 · Thunar completo: compactados, thumbnails, volumes e tema escuro Qt
+
+### Arquivos compactados (ark)
+
+O `thunar-archive-plugin` (já instalado junto do Thunar) só precisa de um
+handler no PATH. Instale o `ark` e o botão direito em `.zip`/`.tar.gz`/`.7z`
+passa a oferecer **"Extrair aqui"**, **"Extrair para..."** e **"Criar
+arquivo..."** automaticamente — sem configuração.
+
+Para o **duplo clique** abrir no Ark, as associações MIME já estão em
+`.config/mimeapps.list` (`application/zip`, `application/gzip`, `application/x-tar`,
+`application/x-7z-compressed`, `application/vnd.rar`, etc. →
+`org.kde.ark.desktop`).
+
+Backends de linha de comando: `7zip` (comando `7z`) e `unzip`.
+
+```bash
+sudo pacman -S ark p7zip unzip
+```
+
+### Miniaturas (tumbler)
+
+```bash
+sudo pacman -S tumbler poppler-glib ffmpegthumbnailer
+```
+
+O daemon `tumblerd` é ativado por D-Bus (`org.freedesktop.thumbnails.
+Thumbnailer1`) quando o Thunar abre uma pasta. Suporta imagens por padrão;
+`poppler-glib` habilita PDF e `ffmpegthumbnailer` habilita vídeo. Se instalar
+esses opcionais depois, reinicie o serviço: `systemctl --user restart
+tumblerd.service`.
+
+### Volumes removíveis e rede (thunar-volman + gvfs)
+
+```bash
+sudo pacman -S thunar-volman gvfs gvfs-mtp gvfs-smb
+```
+
+- `thunar-volman` (+`udisks2`) monta USBs/pendrives automaticamente.
+- `gvfs-mtp` → celular Android via USB (daemon `/usr/lib/gvfsd-mtp`).
+- `gvfs-smb` → compartilhamentos Windows/rede (daemon `/usr/lib/gvfsd-smb`).
+
+Os daemons do gvfs sobem sob demanda via D-Bus.
+
+### Tags de áudio (thunar-media-tags-plugin)
+
+```bash
+sudo pacman -S thunar-media-tags-plugin
+```
+
+Plugin thunarx que adiciona edição de tags (título/artista/álbum) nas
+Propriedades do arquivo de áudio. Plugin novo exige reabrir o Thunar.
+
+### Tema escuro p/ apps Qt/KDE (qt6ct)
+
+Apps KDE (ex.: o Ark) abrem com a paleta clara padrão do Qt fora do Plasma.
+Solução: instalar o `qt6ct` e apontar para um esquema escuro —
+
+```bash
+sudo pacman -S qt6ct
+```
+
+- Config: `~/.config/qt6ct/qt6ct.conf` (estilo `Fusion`, paleta custom
+  `/usr/share/qt6ct/colors/darker.conf` — ver `.config/qt6ct/qt6ct.conf` no repo).
+- É preciso exportar `QT_QPA_PLATFORMTHEME=qt6ct`. Adicionado no
+  `root/usr/local/bin/start-sway` — **só vale do próximo login em diante**;
+  para testar na sessão atual: `env QT_QPA_PLATFORMTHEME=qt6ct ark`.
