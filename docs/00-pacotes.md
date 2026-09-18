@@ -70,16 +70,18 @@ Google). Precisa de `cargo` (~15 min no Celeron N4500) e autenticação via
 ```bash
 sudo pacman -S ark tumbler thunar-volman gvfs gvfs-mtp gvfs-smb \
     p7zip unzip thunar-media-tags-plugin \
-    poppler-glib ffmpegthumbnailer \
+    poppler-glib ffmpegthumbnailer libgsf libgepub libopenraw \
     qt6ct
 ```
 
 - `ark` = handler de extração do `thunar-archive-plugin` (botão direito:
   "Extrair aqui"/"Criar arquivo"). Associações MIME em
   `.config/mimeapps.list` já apontam os compactados para `org.kde.ark.desktop`.
-- `tumbler` (+ `poppler-glib` p/ PDF e `ffmpegthumbnailer` p/ vídeo) =
-  miniaturas no Thunar. Reinicie `systemctl --user restart tumblerd.service`
-  se instalar os opcionais depois.
+- `tumbler` (+ `poppler-glib` p/ PDF, `ffmpegthumbnailer` p/ vídeo,
+  `libgsf` p/ ODF, `libgepub` p/ EPUB e `libopenraw` p/ RAW) = miniaturas
+  no Thunar. Reinicie `systemctl --user restart tumblerd.service`
+  se instalar os opcionais depois. Obs.: `libgepub` puxa o webkit2gtk
+  (~120MB).
 - `thunar-volman` (+ `udisks2`, vêm juntos) = auto-montar USB/dispositivos.
 - `gvfs` + `gvfs-mtp` (celular Android) + `gvfs-smb` (pastas Windows/rede).
 - `thunar-media-tags-plugin` = editar tags de áudio nas Propriedades.

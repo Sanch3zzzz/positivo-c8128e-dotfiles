@@ -208,14 +208,16 @@ sudo pacman -S ark p7zip unzip
 ### Miniaturas (tumbler)
 
 ```bash
-sudo pacman -S tumbler poppler-glib ffmpegthumbnailer
+sudo pacman -S tumbler poppler-glib ffmpegthumbnailer \
+    libgsf libgepub libopenraw
 ```
 
 O daemon `tumblerd` é ativado por D-Bus (`org.freedesktop.thumbnails.
 Thumbnailer1`) quando o Thunar abre uma pasta. Suporta imagens por padrão;
-`poppler-glib` habilita PDF e `ffmpegthumbnailer` habilita vídeo. Se instalar
-esses opcionais depois, reinicie o serviço: `systemctl --user restart
-tumblerd.service`.
+`poppler-glib` habilita PDF, `ffmpegthumbnailer` habilita vídeo, `libgsf`
+ODF, `libgepub` EPUB e `libopenraw` RAW. Se instalar esses opcionais depois,
+reinicie o serviço: `systemctl --user restart tumblerd.service`. Obs.:
+`libgepub` puxa o `webkit2gtk` (~120MB).
 
 ### Volumes removíveis e rede (thunar-volman + gvfs)
 
