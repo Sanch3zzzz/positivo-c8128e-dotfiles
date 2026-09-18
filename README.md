@@ -12,6 +12,8 @@ Configurações e guia **passo a passo completo** para deixar esse notebook
 - Teclado virtual na tela (wvkbd-deskintl), leitor de EPUB (Foliate)
 - Controle de energia por software (governor + teto de frequência)
 - Idle inteligente: trava a tela, apaga e suspende sozinho (swayidle) + alerta de bateria baixa
+- Experiência amigável: ajuda na tela (`MOD + /` ou `?`), boas-vindas no
+  1º login, menu inicial (`MOD + m`) e backup automático dos configs
 - Bluetooth, Wi-Fi, áudio e mídia tudo pela barra (waybar)
 
 Escrito para hardware **Intel Celeron N4500 / UHD Graphics (Jasper Lake)**,
@@ -41,7 +43,8 @@ mas quase tudo reaproveitável em qualquer notebook com touchscreen.
 │   ├── 03-gestos-touch.md     # daemon de gestos + ydotool + rotação
 │   ├── 04-hardware-extras.md  # BT, energia, relógio, teclas extras
 │   ├── 05-apps-ytermusic.md   # apps, MIME, ytermusic, wallpapers
-│   └── 06-troubleshooting.md  # FAQ: gestos, audio, brilho, rotacao...
+│   ├── 06-troubleshooting.md  # FAQ: gestos, audio, brilho, rotacao...
+│   └── 07-ux-amigavel.md    # ajuda, boas-vindas, backup, menu inicial
 ├── .config/                   # configs do usuário (sway, waybar, mako, MIME)
 ├── home/                      # scripts do $HOME (~/.local/bin)
 └── root/                      # arquivos de sistema (referência)
@@ -89,6 +92,8 @@ Ou manualmente, seguindo o `docs/` na ordem. O guia completo começa na
 | Tecla `Positivo` | Print de tela inteira → `~/Images/Prints/` |
 | `MOD + o` | Liga/desliga rotação automática (giroscópio) |
 | `MOD + p` | Posição da tela externa HDMI (Direita/Esquerda/Acima/Abaixo/Desconectar) |
+| `MOD + m` | Menu inicial: ações do dia a dia |
+| `MOD + /` ou `MOD + ?` | Ajuda na tela (atalhos) |
 | `MOD + k` | Teclado virtual (wvkbd-deskintl) — ou pelo botão na waybar (ícone de teclado) |
 | `MOD + '` | Terminal escorregadio (scratchpad) abre/fecha (tecla esquerda do 1) |
 | `Ctrl + Alt + Delete` | Menu de ações: Travar / Suspender / Reiniciar / Desligar / Sair |

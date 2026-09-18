@@ -1,0 +1,8 @@
+[Unit]
+Description=Backup dos dotfiles e Imagens
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/backup-dots.sh
+Nice=19
+IOSchedulingClass=idle

@@ -16,6 +16,9 @@ output eDP-1 resolution 1366x768
 # Wallpaper (exec, nao exec_always: cada reload duplicava o swaybg)
 exec ~/.local/bin/wallpaper-random.sh
 
+# Boas-vindas na primeira sessao (mostra 1x; welcome.sh --again pra rever)
+exec ~/.config/sway/scripts/welcome.sh
+
 # Touchpad
 input type:touchpad {
     dwt enabled
@@ -201,6 +204,16 @@ bindsym $mod+o exec ~/.config/sway/scripts/autorotate.sh
 # (plugou = avisa e abre o menu; nunca mexe na disposicao sozinho)
 bindsym $mod+p exec ~/.config/sway/scripts/external-display.sh
 exec ~/.config/sway/scripts/external-display.sh daemon
+
+# Ajuda na tela - mod+/ ou mod+? abre overlay flutuante com os atalhos.
+# (na ABNT2 a interrogação vive no Shift da mesma tecla do /, por isso os dois)
+for_window [app_id="help"] floating enable, move position center
+for_window [app_id="help"] resize set 1100px 80ppt
+bindsym $mod+slash exec foot --app-id=help ~/.config/sway/scripts/help-screen.sh
+bindsym $mod+question exec foot --app-id=help ~/.config/sway/scripts/help-screen.sh
+
+# Menu inicial (acao do dia a dia) - mod+m
+bindsym $mod+m exec ~/.config/sway/scripts/home-menu.sh
 
 # Tecla Copilot (fw emite Super+Shift+Search) -> abre o opencode
 bindsym $mod+Shift+XF86Search exec $term $HOME/.opencode/bin/opencode
