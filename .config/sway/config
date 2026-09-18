@@ -212,6 +212,11 @@ for_window [app_id="help"] resize set 1100px 80ppt
 bindsym $mod+slash exec foot --app-id=help ~/.config/sway/scripts/help-screen.sh
 bindsym $mod+question exec foot --app-id=help ~/.config/sway/scripts/help-screen.sh
 
+# Painel de status (servicos do sway + sistema) - mod+i
+for_window [app_id="status"] floating enable, move position center
+for_window [app_id="status"] resize set 1100px 90ppt
+bindsym $mod+i exec foot --app-id=status ~/.config/sway/scripts/system-status.sh
+
 # Menu inicial (acao do dia a dia) - mod+m
 bindsym $mod+m exec ~/.config/sway/scripts/home-menu.sh
 

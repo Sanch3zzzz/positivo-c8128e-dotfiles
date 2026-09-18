@@ -1,0 +1,7 @@
+[Unit]
+Description=Watchdog dos servicos do sway (status criticos)
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/sway/scripts/service-watchdog.sh
+Nice=10

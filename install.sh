@@ -123,6 +123,7 @@ do_uninstall() {
     while IFS= read -r d; do restore_file "$d"; done < <(user_files)
     systemctl --user disable --now battery-alert.timer 2>/dev/null || true
     systemctl --user disable --now dotfiles-backup.timer 2>/dev/null || true
+    systemctl --user disable --now service-watchdog.timer 2>/dev/null || true
     systemctl --user disable --now ydotool.service 2>/dev/null || true
     if [ "$WANT_ROOT" -eq 1 ]; then
         echo "(arquivos de sistema)"
@@ -156,6 +157,8 @@ do_check() {
         && yes "timer alerta de bateria" || no "timer alerta de bateria (systemctl --user enable --now battery-alert.timer)"
     systemctl --user is-enabled dotfiles-backup.timer >/dev/null 2>&1 \
         && yes "timer backup de dotfiles" || no "timer backup de dotfiles (systemctl --user enable --now dotfiles-backup.timer)"
+    systemctl --user is-enabled service-watchdog.timer >/dev/null 2>&1 \
+        && yes "watchdog de servicos (10min)" || no "watchdog de servicos (systemctl --user enable --now service-watchdog.timer)"
     systemctl --user is-enabled ydotool.service >/dev/null 2>&1 \
         && yes "ydotool.service" || no "ydotool.service (systemctl --user enable --now ydotool.service)"
 
@@ -257,6 +260,7 @@ echo "== Servicos do usuario =="
 systemctl --user enable --now ydotool.service 2>/dev/null || true
 systemctl --user enable --now battery-alert.timer 2>/dev/null || true
 systemctl --user enable --now dotfiles-backup.timer 2>/dev/null || true
+systemctl --user enable --now service-watchdog.timer 2>/dev/null || true
 
 if [ "$WANT_ROOT" -eq 1 ]; then
     echo "== Arquivos de sistema (sudo) =="

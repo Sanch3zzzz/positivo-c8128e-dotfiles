@@ -12,6 +12,7 @@ labels=('Terminal'
         'Print de tela'
         'Tela externa (HDMI)'
         'Sistema (energia)'
+        'Status do sistema'
         'Rotacao automatica'
         'Teclado virtual'
         'Ajuda')
@@ -21,6 +22,7 @@ cmds=(foot
       "$HOME/.config/sway/scripts/screenshot-full.sh"
       "$HOME/.config/sway/scripts/external-display.sh"
       "$HOME/.config/sway/scripts/power-actions.sh"
+      "foot --app-id=status $HOME/.config/sway/scripts/system-status.sh"
       "$HOME/.config/sway/scripts/autorotate.sh"
       "$HOME/.config/sway/scripts/toggle-osk.sh"
       "foot --app-id=help $HOME/.config/sway/scripts/help-screen.sh")

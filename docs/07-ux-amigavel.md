@@ -66,3 +66,33 @@ tar -xzf ~/Backup/dots/<timestamp>/dots.tgz -C ~  # restaura tudo
 
 > Dica: aumentar a retenção? edite `KEEP=` no
 > `~/.local/bin/backup-dots.sh`.
+
+## 7.5 · Status do sistema e watchdog
+
+### Painel de status — `MOD + i`
+
+Abre um painel flutuante (foot, `app-id=status`) com três blocos:
+
+- **Sessão sway**: waybar, mako, swayidle (auto-trava), swaybg (wallpaper),
+  cliphist, daemon da tela externa, gestos de toque e rotação automática;
+- **Unidades do usuário**: timers `dotfiles-backup`, `battery-alert`,
+  `service-watchdog` e `ydotool.service` (com a próxima execução);
+- **Sistema**: greetd, oomd, rede, bluetooth, zram, bateria, disco `/`
+  (eMMC), RAM e temperatura da CPU.
+
+Itens **PARADO** aparecem em vermelho; fecha com qualquer tecla.
+Script: `~/.config/sway/scripts/system-status.sh`.
+
+### Watchdog — avisa se algo cair
+
+O timer `service-watchdog.timer` roda **a cada 10 min** o
+`service-watchdog.sh`, checando os processos e unidades críticos. Se algo
+cair, manda uma notificação (mako, crítica) dizendo o que parou; quando o
+serviço voltar, avisa a restauração.
+
+- Critérios monitorados: waybar, mako, swayidle, swaybg, cliphist,
+  ydotool, daemon da tela externa e gestos de toque.
+- Não alerta para a **rotação automática** desligada (é toggle manual via
+  `MOD + o`) nem para o serviço nunca iniciado naquela sessão.
+- Estado fica em `/tmp/sway-service-watchdog.state` (evita repetir aviso).
+- Para rodar na hora: `systemctl --user start service-watchdog.service`.
