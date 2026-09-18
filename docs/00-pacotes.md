@@ -121,4 +121,6 @@ systemctl --user enable --now battery-alert.timer   # unidades: ./install.sh
 
 **Nota:** o `install.sh` **não instala pacotes** — só copia configs. Depois de
 instalar tudo acima: `./install.sh` (configs de usuário) e `./install.sh
---root` (arquivos de sistema: greetd, logind, sudoers, start-sway).
+--root` (arquivos de sistema: greetd, logind, sudoers, start-sway). Confira
+com `./install.sh --check`; desfaz com `./install.sh --uninstall`. Procurou
+e não achou o erro? Veja `06-troubleshooting.md`.

@@ -38,7 +38,8 @@ mas quase tudo reaproveitável em qualquer notebook com touchscreen.
 │   ├── 02-gui-sway-wayland.md # seatd, sway, foot, waybar, mako, audio
 │   ├── 03-gestos-touch.md     # daemon de gestos + ydotool + rotação
 │   ├── 04-hardware-extras.md  # BT, energia, relógio, teclas extras
-│   └── 05-apps-ytermusic.md   # apps, MIME, ytermusic, wallpapers
+│   ├── 05-apps-ytermusic.md   # apps, MIME, ytermusic, wallpapers
+│   └── 06-troubleshooting.md  # FAQ: gestos, audio, brilho, rotacao...
 ├── .config/                   # configs do usuário (sway, waybar, mako, MIME)
 ├── home/                      # scripts do $HOME (~/.local/bin)
 └── root/                      # arquivos de sistema (referência)
@@ -52,8 +53,15 @@ mas quase tudo reaproveitável em qualquer notebook com touchscreen.
 ```bash
 git clone https://github.com/<seu-usuario>/positivo-c8128e-dotfiles.git
 cd positivo-c8128e-dotfiles
-./install.sh            # instala configs do usuário (não mexe em root)
+./install.sh            # instala configs do usuario (mostra faltantes)
+./install.sh --root     # arquivos de sistema: greetd, logind, sudoers, zram
+./install.sh --check    # valida pacotes, grupos, timers e estrutura
 ```
+
+O instalador não apaga nada — backups ficam como `*.bak.<timestamp>` no
+mesmo destino (desfaça com `./install.sh --uninstall`). Se a pasta
+`~/Images/Wallpapers` estiver vazia, o swaybg usa a cor sólida do tema
+como fallback.
 
 Ou manualmente, seguindo o `docs/` na ordem. O guia completo começa na
 [instalação do Arch do zero](docs/01-instalacao-arch.md).

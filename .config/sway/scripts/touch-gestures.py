@@ -44,8 +44,15 @@ TAP_TIME = 0.25         # max duracao p/ contar como tap (clique esquerdo)
 LONG_PRESS = 0.60       # min duracao p/ segurar parado = clique direito
 TAP_MOVE = 12           # movimento max p/ contar como toque parado
 
-# Daemon do ydotool (user service, socket DGRAM em /run/user/<uid>/)
-YDOTOOL_SOCK = "/run/user/1000/.ydotool_socket"
+# Daemon do ydotool (user service, socket DGRAM em /run/user/<uid>/).
+# NAO fixa uid: descoberto por glob (aguenta re-exec via sudo -n e outra conta).
+YDOTOOL_SOCK = None
+
+
+def find_ydotool_sock():
+    for s in sorted(glob.glob("/run/user/*/.ydotool_socket")):
+        return s
+    return None
 
 
 def find_device():
@@ -116,8 +123,14 @@ def sway_json(*args):
 
 
 def click(button, x, y):
+    global YDOTOOL_SOCK
     sway("seat seat0 cursor set %d %d" % (int(x), int(y)))
     time.sleep(0.05)
+    if YDOTOOL_SOCK is None:
+        YDOTOOL_SOCK = find_ydotool_sock()
+    if YDOTOOL_SOCK is None:
+        log("ydotool socket nao encontrado (daemon rodando?)")
+        return
     env = dict(os.environ)
     env["YDOTOOL_SOCKET"] = YDOTOOL_SOCK
     subprocess.run(["ydotool", "click", button], env=env, timeout=2,

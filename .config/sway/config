@@ -198,7 +198,7 @@ bindsym $mod+apostrophe exec ~/.config/sway/scripts/toggle-scratchpad.sh
 bindsym $mod+o exec ~/.config/sway/scripts/autorotate.sh
 
 # Tecla Copilot (fw emite Super+Shift+Search) -> abre o opencode
-bindsym $mod+Shift+XF86Search exec $term /home/gustavosp/.opencode/bin/opencode
+bindsym $mod+Shift+XF86Search exec $term $HOME/.opencode/bin/opencode
 # Tecla Positivo (xkb 195 = FK17 -> XF86Launch8) -> print de tela inteira
 bindsym XF86Launch8 exec ~/.config/sway/scripts/screenshot-full.sh
 
