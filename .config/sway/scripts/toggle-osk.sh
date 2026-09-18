@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BIN=wvkbd-mobintl
+BIN=wvkbd-deskintl
 STATE=/tmp/wvkbd-visible
 
 if pgrep -x "$BIN" >/dev/null 2>&1; then
@@ -13,7 +13,7 @@ if pgrep -x "$BIN" >/dev/null 2>&1; then
         touch "$STATE"
     fi
 else
-    "$BIN" --fn 'JetBrainsMono Nerd Font Mono 14' </dev/null >/dev/null 2>&1 &
+    "$BIN" --fn 'JetBrainsMono Nerd Font Mono 14' --alpha 175 --non-exclusive </dev/null >/dev/null 2>&1 &
     disown
     touch "$STATE"
 fi
