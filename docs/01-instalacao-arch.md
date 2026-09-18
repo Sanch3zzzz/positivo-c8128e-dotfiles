@@ -70,7 +70,7 @@ swapon /dev/mmcblk0p2
 
 ```bash
 pacstrap -K /mnt base linux linux-firmware intel-ucode \
-    networkmanager sudo git vim
+    networkmanager sudo git nano
 
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
@@ -84,17 +84,17 @@ hwclock --systohc
 ```
 
 ```bash
-vim /etc/locale.gen        # descomente: pt_BR.UTF-8 UTF-8 e en_US.UTF-8 UTF-8
+nano -w /etc/locale.gen        # descomente: pt_BR.UTF-8 UTF-8 e en_US.UTF-8 UTF-8
 locale-gen
 ```
 
 ```bash
-vim /etc/locale.conf       # LANG=pt_BR.UTF-8
-vim /etc/vconsole.conf     # KEYMAP=br-abnt2
+nano -w /etc/locale.conf       # LANG=pt_BR.UTF-8
+nano -w /etc/vconsole.conf     # KEYMAP=br-abnt2
 ```
 
 ```bash
-vim /etc/hostname          # ex.: positivo-c8128e
+nano -w /etc/hostname          # ex.: positivo-c8128e
 ```
 
 Senha root e usuário com privilégios:
@@ -110,7 +110,7 @@ escrever em `/sys`; alternativa mais restrita: NOPASSWD só para os comandos
 do power-menu):
 
 ```bash
-vim /etc/sudoers.d/10-celeron-nopasswd
+nano -w /etc/sudoers.d/10-celeron-nopasswd
 # %wheel ALL=(ALL:ALL) NOPASSWD: ALL
 ```
 
@@ -118,7 +118,7 @@ vim /etc/sudoers.d/10-celeron-nopasswd
 
 ```bash
 bootctl install
-vim /boot/loader/entries/arch.conf
+nano -w /boot/loader/entries/arch.conf
 ```
 
 ```ini

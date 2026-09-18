@@ -7,7 +7,7 @@ guia completo em `01`..`05` (link pro passo a passo quando houver).
 
 ```bash
 pacstrap -K /mnt base linux linux-firmware intel-ucode \
-    networkmanager sudo git vim
+    networkmanager sudo git nano
 ```
 
 ## 2 · Ambiente gráfico (Sway + Wayland — ver `02-gui-sway-wayland.md`)
