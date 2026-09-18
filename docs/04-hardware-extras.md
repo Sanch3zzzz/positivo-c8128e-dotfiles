@@ -112,3 +112,45 @@ evtest /dev/input/*            # scancodes brutos (teclado interno AT)
 wev                            # keysym real dentro da sessão Wayland
 xkbcli compile-keymap --rules evdev --model abnt2 --layout br   # keymap
 ```
+
+## 4.8 · Tela externa (HDMI / micro-HDMI)
+
+O C8128E possui uma saída micro-HDMI. Ao conectar um monitor ou TV, o sway
+detecta automaticamente; o script `external-display.sh` (em
+`~/.config/sway/scripts/`) cuida da posição e escala:
+
+- **`MOD + p`**: abre um menu (wmenu) com as opções Direita / Esquerda /
+  Acima / Abaixo / Desconectar.
+- **hotplug (plugou / tirou)**: um daemon em background **avisa** e abre
+  o menu — nunca muda a posição sozinho, só quando você escolher.
+- **Escala automática** baseado na resolução externa (2160p → 1,5; 1440p
+  → 1,25; 1080p e abaixo → 1,0). Para ajuste manual:
+
+  ```bash
+  swaymsg output HDMI-A-1 scale 1.25
+  swaymsg output HDMI-A-1 mode 1920x1080@60Hz
+  ```
+
+### Como ver o nome do output externo
+
+```bash
+swaymsg -t get_outputs          # JSON bruto (procure por HDMI-A-1, DP-1 etc.)
+swaymsg -t get_outputs -r | python3 -c "import json,sys; [print(o['name'],o['active']) for o in json.load(sys.stdin)]"
+```
+
+### Mover workspace pra tela externa
+
+```bash
+swaymsg workspace 2; swaymsg move workspace to output HDMI-A-1
+```
+
+### Áudio por HDMI
+
+Quando a TV é conectada, o `PulseAudio/PipeWire` pode adicionar um novo
+sink. Para direcionar o áudio (pode variar):
+
+```bash
+pactl list sinks short              # veja os sinks disponíveis
+pactl set-sink-volume @DEFAULT_SINK@ 100%
+pactl set-default-sink <sink-name>  # direciona o áudio pra TV
+```

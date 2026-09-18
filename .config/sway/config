@@ -197,6 +197,11 @@ bindsym $mod+apostrophe exec ~/.config/sway/scripts/toggle-scratchpad.sh
 # Rotacao automatica da tela (giroscopio) - mod+o liga/desliga
 bindsym $mod+o exec ~/.config/sway/scripts/autorotate.sh
 
+# Tela externa (HDMI) - mod+p escolhe onde fica; daemon assiste o hotplug
+# (plugou = avisa e abre o menu; nunca mexe na disposicao sozinho)
+bindsym $mod+p exec ~/.config/sway/scripts/external-display.sh
+exec ~/.config/sway/scripts/external-display.sh daemon
+
 # Tecla Copilot (fw emite Super+Shift+Search) -> abre o opencode
 bindsym $mod+Shift+XF86Search exec $term $HOME/.opencode/bin/opencode
 # Tecla Positivo (xkb 195 = FK17 -> XF86Launch8) -> print de tela inteira

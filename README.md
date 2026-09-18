@@ -7,6 +7,8 @@ Configurações e guia **passo a passo completo** para deixar esse notebook
 - **Gestos de toque de verdade** na touchscreen (tap = clique, segurar =
   clique direito, arrastar = swap de janela, 2 dedos = troca de workspace)
 - Rotação automática de tela pelo giroscópio (modo tablet)
+- Tela externa via HDMI/micro-HDMI: `MOD + p` escolhe onde fica (direita,
+  esquerda, cima, baixo, desconectar); hotplug só avisa e abre o menu
 - Teclado virtual na tela (wvkbd-deskintl), leitor de EPUB (Foliate)
 - Controle de energia por software (governor + teto de frequência)
 - Idle inteligente: trava a tela, apaga e suspende sozinho (swayidle) + alerta de bateria baixa
@@ -86,6 +88,7 @@ Ou manualmente, seguindo o `docs/` na ordem. O guia completo começa na
 | `MOD + Shift + v` | Histórico da área de transferência (cliphist) |
 | Tecla `Positivo` | Print de tela inteira → `~/Images/Prints/` |
 | `MOD + o` | Liga/desliga rotação automática (giroscópio) |
+| `MOD + p` | Posição da tela externa HDMI (Direita/Esquerda/Acima/Abaixo/Desconectar) |
 | `MOD + k` | Teclado virtual (wvkbd-deskintl) — ou pelo botão na waybar (ícone de teclado) |
 | `MOD + '` | Terminal escorregadio (scratchpad) abre/fecha (tecla esquerda do 1) |
 | `Ctrl + Alt + Delete` | Menu de ações: Travar / Suspender / Reiniciar / Desligar / Sair |
