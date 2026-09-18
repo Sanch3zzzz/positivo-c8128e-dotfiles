@@ -1,8 +1,9 @@
 # Idle: trava 5min parado, apaga a tela aos 10min, suspende aos 30min.
 # Rodado com `swayidle -w -C` (wait p/ before-sleep funcionar).
+# Pegadinha: `resume` NAO e evento standalone no swayidle 1.9 (so existe como
+# sufixo da linha `timeout`); `after-resume` e o hook de wake do logind.
 timeout 300 'swaylock -f'
-timeout 600 'swaymsg "output * dpms off"'
-resume 'swaymsg "output * dpms on"'
+timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
 before-sleep 'swaylock -f'
 after-resume 'swaymsg "output * dpms on"'
 timeout 1800 'systemctl suspend'

@@ -66,6 +66,23 @@ oscripts com `exec_always` precisam de trava própria (o `touch-gestures.py`
 tem `flock`, o `wallpaper-random.sh` dá `pkill -x swaybg`). Não adicione
 `exec_always` em serviço de processo único.
 
+### A trava/suspensão automática (swayidle) não funciona
+Se `pgrep -a swayidle` não retorna nada, o config provavelmente tem erro de
+sintaxe e o swayidle abortou. Teste com
+`swayidle -d -C ~/.config/swayidle/config`: **`resume` não é evento
+standalone** no swayidle 1.9 — ele só existe como sufixo de uma linha
+`timeout`:
+
+```conf
+timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"'
+```
+
+(errado: `timeout 600 '...'` seguido de uma linha `resume '...'` — isso dá
+`Unexpected keyword "resume"` e mata todos os timeouts). O hook de wake do
+logind é `after-resume`, esse sim é um evento válido. Como o sway sobe o
+swayidle com `exec` (não `exec_always`), depois de corrigir reinicie a
+sessão ou rode `pkill swayidle; swayidle -w -C ~/.config/swayidle/config &`.
+
 ### Validar a config sem derrubar a sessão
 ```bash
 sway --validate -c ~/.config/sway/config
