@@ -36,7 +36,7 @@ O bar usa `~/.config/waybar/scripts/power-menu.sh`:
 
 O script precisa de root para escrever em
 `/sys/devices/system/cpu/cpufreq/policy*` → é o motivo do NOPASSWD no
-sudoers (ver [02 · sudoers](02-gui-sway-wayland.md#25-alias-para-iniciar-o-sway-grupo-seat)).
+sudoers (configurado em [01 · dentro do chroot](01-instalacao-arch.md#15-dentro-do-chroot)).
 
 Opção mais restrita que o `%wheel NOPASSWD: ALL`: criar um NOPASSWD só para
 o power-menu:
@@ -62,7 +62,7 @@ sudo timedatectl set-timezone America/Sao_Paulo
 sudo systemctl enable --now systemd-timesyncd.service
 ```
 
-## 4.5 · Branfibrio / áudio / mídia na tecla de função
+## 4.5 · Brilho / áudio / mídia na tecla de função
 
 Os binds ficam no config do sway: `XF86Audio*`, `XF86MonBrightness*`. Tudo
 com `--locked` para funcionar com a tela travada (swaylock).

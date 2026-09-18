@@ -89,10 +89,12 @@ Mapa orientação → transform (validado no aparelho; varia por modelo):
 
 Caso gire pro lado errado, inverta `90` e `270` no `map_orient()` do script.
 
-## 3.5 · Teclado virtual (wvkbd)
+## 3.5 · Teclado virtual (wvkbd-deskintl)
 
 `~/.config/sway/scripts/toggle-osk.sh`, atalho **`MOD + k`**. Alterna liga/
-desliga do `wvkbd-mobintl` (ATIVO: instale `wvkbd`).
+desliga do `wvkbd-deskintl` (ATIVO: instale `wvkbd-deskintl` do AUR — o
+layout `deskintl` tem melhor suporte nativo a retrato e **conflita** com o
+pacote `wvkbd`).
 
 Como o teclado virtual **não tem tecla MOD**, há também um **botão na
 waybar** (módulo `custom/osk`, ícone de teclado, ao lado do bluetooth)

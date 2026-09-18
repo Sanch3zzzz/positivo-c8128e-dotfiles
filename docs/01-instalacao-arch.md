@@ -35,7 +35,7 @@ Confirme com `ping -c 3 archlinux.org`.
 
 O disco interno é **eMMC → `/dev/mmcblk0`**. Partições usadas:
 
-| Partição | Tamanho | Tipo | Sistem de arquivos | Mount |
+| Partição | Tamanho | Tipo | Sistema de arquivos | Mount |
 |---|---|---|---|---|
 | `mmcblk0p1` | 512M | ESP (EFI) | vfat | `/boot` |
 | `mmcblk0p2` | 4G | swap | swap | - |

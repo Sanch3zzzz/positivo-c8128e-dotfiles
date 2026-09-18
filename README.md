@@ -7,7 +7,7 @@ Configurações e guia **passo a passo completo** para deixar esse notebook
 - **Gestos de toque de verdade** na touchscreen (tap = clique, segurar =
   clique direito, arrastar = swap de janela, 2 dedos = troca de workspace)
 - Rotação automática de tela pelo giroscópio (modo tablet)
-- Teclado virtual na tela (wvkbd), leitor de EPUB (Foliate)
+- Teclado virtual na tela (wvkbd-deskintl), leitor de EPUB (Foliate)
 - Controle de energia por software (governor + teto de frequência)
 - Bluetooth, Wi-Fi, áudio e mídia tudo pela barra (waybar)
 
@@ -77,7 +77,7 @@ Ou manualmente, seguindo o `docs/` na ordem. O guia completo começa na
 | `MOD + Shift + v` | Histórico da área de transferência (cliphist) |
 | Tecla `Positivo` | Print de tela inteira → `~/Images/Prints/` |
 | `MOD + o` | Liga/desliga rotação automática (giroscópio) |
-| `MOD + k` | Teclado virtual (wvkbd) — ou pelo botão na waybar (ícone de teclado) |
+| `MOD + k` | Teclado virtual (wvkbd-deskintl) — ou pelo botão na waybar (ícone de teclado) |
 | `MOD + '` | Terminal escorregadio (scratchpad) abre/fecha (tecla esquerda do 1) |
 | Tecla `Copilot` | Abre o opencode |
 

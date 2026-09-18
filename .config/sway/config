@@ -187,7 +187,7 @@ bindsym --locked XF86AudioPrev exec playerctl previous
 bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioStop exec playerctl stop
 
-# Teclado virtual na tela (wvkbd) - mod+k alterna
+# Teclado virtual na tela (wvkbd-deskintl) - mod+k alterna
 bindsym $mod+k exec ~/.config/sway/scripts/toggle-osk.sh
 
 # Terminal escorregadio (scratchpad) - mod+' abre/fecha (tecla a esquerda do 1;

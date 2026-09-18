@@ -29,6 +29,9 @@ sudo pacman -S python-evdev ydotool
 
 > O daemon de gestos re-executa via `sudo -n`; acessa `/dev/input/*` e
 > `/dev/uinput` sem senha (ver `root/etc/sudoers.d/10-celeron-nopasswd`).
+>
+> Teclado virtual na tela: `wvkbd-deskintl` (AUR; **conflita** com o pacote
+> `wvkbd`). Detalhes e atalho (`MOD + k`) em `03-gestos-touch.md` §3.5.
 
 ## 4 · Tela de login (greetd + tuigreet — ver `02`)
 

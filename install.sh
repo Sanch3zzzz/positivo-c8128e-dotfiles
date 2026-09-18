@@ -49,6 +49,9 @@ mkdir -p "$HOME/.config/mako"
 # MIME
 backup_copy "$HERE/.config/mimeapps.list" "$HOME/.config/mimeapps.list"
 
+# qt6ct (tema escuro p/ apps Qt/KDE)
+backup_copy "$HERE/.config/qt6ct/qt6ct.conf" "$HOME/.config/qt6ct/qt6ct.conf"
+
 # scripts do usuario
 for f in "$HERE"/home/.local/bin/*; do
     b="$(basename "$f")"
@@ -76,8 +79,7 @@ fi
 
 echo
 echo "Concluido! Proximos passos:"
-echo "  1. alias sway no ~/.bashrc:"
-echo "       alias sway='exec newgrp seat -c /usr/bin/sway'"
-echo "  2. leave/relogin (ou restart) para a variavel TERMINAL valer"
-echo "  3. rode 'sway' do TTY"
-echo "  4. usuario precisa estar no grupo 'seat':  usermod -aG seat \$USER"
+echo "  1. manter o usuario no grupo 'seat':  sudo usermod -aG seat \$USER"
+echo "  2. logout/relogin (ou restart) para TERMINAL e o tema qt6ct valerem"
+echo "  3. com o greetd ativo, reinicie: cai direto na tela de login (tuigreet)"
+echo "  4. alternativa manual (TTY):  alias sway='exec newgrp seat -c /usr/bin/sway'"

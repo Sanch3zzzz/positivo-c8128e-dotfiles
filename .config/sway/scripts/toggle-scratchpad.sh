@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Terminal escorregadio (scratchpad) - abre/fecha com MOD+grave.
+# Terminal escorregadio (scratchpad) - abre/fecha com MOD+' (apostrophe).
 # Se ja existe uma janela scratchpad, alterna mostrar/esconder.
 # Senao, cria um foot novo e manda pro scratchpad.
 SCRATCHPAD_APP_ID="scratchpad"
