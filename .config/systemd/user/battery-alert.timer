@@ -1,0 +1,10 @@
+[Unit]
+Description=Alerta de bateria baixa (timer, a cada 3min)
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=3min
+Unit=battery-alert.service
+
+[Install]
+WantedBy=timers.target

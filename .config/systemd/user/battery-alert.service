@@ -1,0 +1,6 @@
+[Unit]
+Description=Alerta de bateria baixa (disparado pelo timer)
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/battery-alert.sh

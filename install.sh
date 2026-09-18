@@ -43,14 +43,24 @@ for f in "$HERE"/.config/waybar/scripts/*; do
     chmod +x "$HOME/.config/waybar/scripts/$b"
 done
 
-# mako (padrao: vazio)
-mkdir -p "$HOME/.config/mako"
-
 # MIME
 backup_copy "$HERE/.config/mimeapps.list" "$HOME/.config/mimeapps.list"
 
 # qt6ct (tema escuro p/ apps Qt/KDE)
 backup_copy "$HERE/.config/qt6ct/qt6ct.conf" "$HOME/.config/qt6ct/qt6ct.conf"
+
+# swaylock (tela travada) + swayidle (idle/trava/suspende)
+backup_copy "$HERE/.config/swaylock/config" "$HOME/.config/swaylock/config"
+backup_copy "$HERE/.config/swayidle/config" "$HOME/.config/swayidle/config"
+
+# mako (notificacoes; OSD de volume/brilho e alerta de bateria usam ele)
+backup_copy "$HERE/.config/mako/config" "$HOME/.config/mako/config"
+
+# unidades de usuario (timer do alerta de bateria)
+for f in "$HERE"/.config/systemd/user/*; do
+    b="$(basename "$f")"
+    backup_copy "$f" "$HOME/.config/systemd/user/$b"
+done
 
 # scripts do usuario
 for f in "$HERE"/home/.local/bin/*; do
@@ -61,6 +71,7 @@ done
 
 echo "== Servicos do usuario =="
 systemctl --user enable --now ydotool.service 2>/dev/null || true
+systemctl --user enable --now battery-alert.timer 2>/dev/null || true
 
 if [ "$WANT_ROOT" -eq 1 ]; then
     echo "== Arquivos de sistema (sudo) =="
@@ -69,10 +80,17 @@ if [ "$WANT_ROOT" -eq 1 ]; then
     backup_copy "$HERE/root/etc/greetd/config.toml" /etc/greetd/config.toml
     backup_copy "$HERE/root/etc/systemd/logind.conf.d/power-button.conf" \
         /etc/systemd/logind.conf.d/power-button.conf
+    backup_copy "$HERE/root/etc/systemd/logind.conf.d/lid.conf" \
+        /etc/systemd/logind.conf.d/lid.conf
+    backup_copy "$HERE/root/etc/systemd/zram-generator.conf" \
+        /etc/systemd/zram-generator.conf
+    backup_copy "$HERE/root/etc/systemd/system/user.slice.d/oomd.conf" \
+        /etc/systemd/system/user.slice.d/oomd.conf
     backup_copy "$HERE/root/etc/sudoers.d/10-celeron-nopasswd" \
         /etc/sudoers.d/10-celeron-nopasswd
     chmod 440 /etc/sudoers.d/10-celeron-nopasswd
     echo "  (sudoers NOPASSWD: confira com 'sudo visudo -c')"
+    echo "  (zram/lid/oomd: rode 'sudo systemctl daemon-reload' apos instalar)"
 else
     echo "== Arquivos de sistema: pulado (use ./install.sh --root) =="
 fi

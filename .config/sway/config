@@ -13,8 +13,8 @@ set $filemanager thunar
 # Output - tela interna
 output eDP-1 resolution 1366x768
 
-# Wallpaper
-exec_always ~/.local/bin/wallpaper-random.sh
+# Wallpaper (exec, nao exec_always: cada reload duplicava o swaybg)
+exec ~/.local/bin/wallpaper-random.sh
 
 # Touchpad
 input type:touchpad {
@@ -212,5 +212,11 @@ exec waybar
 
 # Mako notifications
 exec mako
+
+# Idle: trava 5min, apaga tela 10min, suspende 30min (swayidle)
+exec swayidle -w -C ~/.config/swayidle/config
+
+# Menu de acoes do sistema (travar/suspender/reiniciar/desligar/sair)
+bindsym Control+Alt+Delete exec ~/.config/sway/scripts/power-actions.sh
 
 include /etc/sway/config.d/*

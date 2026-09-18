@@ -254,3 +254,44 @@ sudo pacman -S qt6ct
 - É preciso exportar `QT_QPA_PLATFORMTHEME=qt6ct`. Adicionado no
   `root/usr/local/bin/start-sway` — **só vale do próximo login em diante**;
   para testar na sessão atual: `env QT_QPA_PLATFORMTHEME=qt6ct ark`.
+
+## 2.11 · Idle, trava de tela, bateria e feedback de volume/brilho
+
+### Travar e apagar tela (swayidle + swaylock)
+
+O sway sobe o `swayidle -w -C ~/.config/swayidle/config` junto com o mako:
+
+| Tempo parado | Ação |
+|---|---|
+| 5 min | `swaylock -f` (trava, tema em `~/.config/swaylock/config`) |
+| 10 min | tela apaga (`output * dpms off`); volta com qualquer tecla |
+| 30 min | `systemctl suspend` |
+
+`before-sleep` também trava antes de suspender (botão de energia ou lid).
+
+### Menu de ações (`Ctrl + Alt + Delete`)
+
+Abre o `power-actions.sh` (wmenu): **Travar / Suspender / Reiniciar /
+Desligar / Sair**. Reiniciar/Desligar/Sair pedem confirmação via swaynag.
+O `MOD + Shift + e` continua sendo o sair direto.
+
+### Alerta de bateria baixa
+
+Waybar já pinta o ícone em aviso/crítico; agora um timer do usuário
+(`~/.config/systemd/user/battery-alert.timer`, a cada 3 min) dispara um
+`notify-send` (crítico, sem timeout) quando descarrega abaixo de **30%**,
+**15%** e **10%** — avisando 1x por limiar. Reset ao recarregar.
+
+### OSD de volume e brilho
+
+`vol-step.sh` (scroll do volume) e `brightness-step.sh` (scroll do brilho,
+novo) mostram um popup no mako por ~0,8s com o nível atual. O mako agora
+tem config (`~/.config/mako/config`) com o tema Dark Azul.
+
+### Fix: wallpaper sem vazar swaybg
+
+O `wallpaper-random.sh` trocou de `exec_always` para `exec` — cada `reload`
+do sway duplicava o `swaybg` (mesmo problema que o waybar teve). O script
+também chama `pkill -x swaybg` antes de subir, pra re-rodadas manuais não
+empilharem instâncias. A wallpaper continua viva entre reloads (o sway não
+mata o `swaybg` no reload).

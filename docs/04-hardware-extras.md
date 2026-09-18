@@ -45,14 +45,20 @@ o power-menu:
 gustavosp ALL=(ALL) NOPASSWD: /home/<user>/.config/waybar/scripts/power-menu.sh
 ```
 
-## 4.3 · Botão de energia
+## 4.3 · Botão de energia e tampa (lid)
 
-Comportamento personalizado via drop-in do logind
-(`/etc/systemd/logind.conf.d/power-button.conf`, incluído no repo):
+Comportamento via drop-ins do logind (`/etc/systemd/logind.conf.d/`,
+incluídos no repo):
 
 ```ini
+# power-button.conf
 [Login]
 HandlePowerKey=suspend
+
+# lid.conf
+[Login]
+HandleLidSwitch=suspend
+HandleLidSwitchExternalPower=suspend
 ```
 
 ## 4.4 · Relógio

@@ -1,0 +1,21 @@
+# swaylock com o tema Dark Azul Vibrante.
+color=0a1628
+font=JetBrainsMono Nerd Font Mono
+ring-color=2f66a8
+key-hl-color=00d4ff
+bs-hl-color=ff5555
+inside-color=122442
+ring-ver-color=00d4ff
+inside-ver-color=1c3055
+ring-wrong-color=ff5555
+inside-wrong-color=122442
+line-color=00000000
+line-ver-color=00000000
+line-wrong-color=ff5555
+separator-color=00000000
+text-color=ffffff
+text-ver-color=ffffff
+text-wrong-color=ffffff
+layout-bg-color=122442
+layout-border-color=2f66a8
+layout-text-color=00d4ff

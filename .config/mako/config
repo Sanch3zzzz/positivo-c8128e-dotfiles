@@ -1,0 +1,27 @@
+# Notificacoes (mako) com o tema Dark Azul Vibrante.
+font=JetBrainsMono Nerd Font Mono 12
+background-color=#122442
+text-color=#dfe6f0
+border-color=#2f66a8
+border-size=2
+border-radius=3
+default-timeout=2500
+anchor=bottom-right
+margin=8
+padding=8
+width=340
+icons=0
+
+[urgency=low]
+background-color=#122442
+border-color=#2f66a8
+default-timeout=2000
+
+[urgency=normal]
+background-color=#122442
+border-color=#2f66a8
+
+[urgency=critical]
+background-color=#2f66a8
+border-color=#ff5555
+default-timeout=0

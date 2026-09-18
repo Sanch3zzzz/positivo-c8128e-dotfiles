@@ -9,6 +9,7 @@ Configurações e guia **passo a passo completo** para deixar esse notebook
 - Rotação automática de tela pelo giroscópio (modo tablet)
 - Teclado virtual na tela (wvkbd-deskintl), leitor de EPUB (Foliate)
 - Controle de energia por software (governor + teto de frequência)
+- Idle inteligente: trava a tela, apaga e suspende sozinho (swayidle) + alerta de bateria baixa
 - Bluetooth, Wi-Fi, áudio e mídia tudo pela barra (waybar)
 
 Escrito para hardware **Intel Celeron N4500 / UHD Graphics (Jasper Lake)**,
@@ -79,6 +80,7 @@ Ou manualmente, seguindo o `docs/` na ordem. O guia completo começa na
 | `MOD + o` | Liga/desliga rotação automática (giroscópio) |
 | `MOD + k` | Teclado virtual (wvkbd-deskintl) — ou pelo botão na waybar (ícone de teclado) |
 | `MOD + '` | Terminal escorregadio (scratchpad) abre/fecha (tecla esquerda do 1) |
+| `Ctrl + Alt + Delete` | Menu de ações: Travar / Suspender / Reiniciar / Desligar / Sair |
 | Tecla `Copilot` | Abre o opencode |
 
 Nota: as teclas `Positivo` e `Copilot` são exclusivas desse notebook. Ver

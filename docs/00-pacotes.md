@@ -92,6 +92,31 @@ sudo pacman -S ark tumbler thunar-volman gvfs gvfs-mtp gvfs-smb \
   (`.config/qt6ct/qt6ct.conf` com esquema `darker`); env
   `QT_QPA_PLATFORMTHEME=qt6ct` exportada no `start-sway`.
 
+## 10 · Memória, bateria e idle (ver `02`, `03` e `04`)
+
+```bash
+sudo pacman -S zram-generator systemd-oomd swayidle
+sudo systemctl enable --now systemd-oomd.service
+systemctl --user enable --now battery-alert.timer   # unidades: ./install.sh
+```
+
+- **`zram-generator`** — swap comprimido em RAM (½ da RAM, zstd) com
+  prioridade **100**, maior que o swap de disco: o eMMC (lento + desgastável)
+  só vira reserva em pressão extrema. Config: `root/etc/systemd/zram-generator.conf`.
+- **`systemd-oomd`** — evita a tela congelar com a memória cheia: mata o
+  processo guloso no `user.slice` (drop-in
+  `root/etc/systemd/system/user.slice.d/oomd.conf`).
+- **`swayidle`** (com `swaylock`, já instalado) — trava aos 5min parado,
+  apaga a tela aos 10min e suspende aos 30min; também trava antes de dormir
+  (botão de energia/lid). Config em `.config/swayidle/config` e
+  `.config/swaylock/config`.
+- **Alerta de bateria baixa** — timer do usuário (`battery-alert.timer`,
+  a cada 3min) notifica em 30%/15%/10% descarregando; reset ao recarregar.
+  Script: `home/.local/bin/battery-alert.sh`.
+- **OSD de volume e brilho** — o mako (config em `.config/mako/config`)
+  mostra popup ~0,8s do nível no scroll (scripts `vol-step.sh` e
+  `brightness-step.sh`).
+
 ---
 
 **Nota:** o `install.sh` **não instala pacotes** — só copia configs. Depois de
