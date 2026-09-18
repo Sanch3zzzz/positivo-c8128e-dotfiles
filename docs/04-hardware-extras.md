@@ -138,6 +138,18 @@ swaymsg -t get_outputs          # JSON bruto (procure por HDMI-A-1, DP-1 etc.)
 swaymsg -t get_outputs -r | python3 -c "import json,sys; [print(o['name'],o['active']) for o in json.load(sys.stdin)]"
 ```
 
+> **Pegadinhas (testadas no aparelho, sway 1.12):**
+> - O `get_outputs` **não tem mais `width`/`height` no topo** do objeto;
+>   eles estão em `current_mode` (fallback `rect`). Ler `o["width"]`
+>   direto dá `KeyError` e derruba o script.
+> - **Coordenadas negativas** (`position -1920 0`) precisam ser passadas
+>   numa **única string**: `swaymsg output HDMI-A-1 position -1920 0` faz
+>   o swaymsg engolir o `-1920` como opção (`invalid option -- '1'`).
+>   Use `swaymsg "output HDMI-A-1 position -1920 0 scale 1.00"`.
+> - Depois de `output <name> disable`, o output **continua na lista** de
+>   `get_outputs` (só `active=0`). Para religar: `swaymsg output <name>
+>   enable` (ou replug).
+
 ### Mover workspace pra tela externa
 
 ```bash

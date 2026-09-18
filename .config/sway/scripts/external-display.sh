@@ -23,7 +23,7 @@ find_sock() {
 }
 find_sock || true
 
-# TSV nome largura altura (somente outputs ativos).
+# TSV nome largura altura ativo(0/1) - TODOS os outputs (ativos e desligados).
 outputs_csv() {
     swaymsg -t get_outputs -r 2>/dev/null | python3 -c '
 import json, sys
@@ -32,28 +32,30 @@ try:
 except Exception:
     sys.exit(1)
 for o in d:
-    if o.get("active"):
-        print("%s\t%d\t%d" % (o["name"], o["width"], o["height"]))
+    m = o.get("current_mode") or o.get("rect") or {}
+    print("%s\t%d\t%d\t%d" % (o["name"], m.get("width", 0), m.get("height", 0),
+                              1 if o.get("active") else 0))
 '
 }
 
-# Preenche EXT_NAMES/EXT_W/EXT_H (externas ativas) e INT_W/INT_H (interna).
+# Preenche EXT_NAMES/EXT_W/EXT_H/EXT_ACTIVE (externas) e INT_W/INT_H (interna).
 read_outputs() {
     EXT_NAMES=()
     EXT_W=()
     EXT_H=()
+    EXT_ACTIVE=()
     INT_W=0
     INT_H=0
-    local n w2 h2
-    while IFS=$'\t' read -r n w2 h2; do
+    local n w2 h2 a
+    while IFS=$'\t' read -r n w2 h2 a; do
         [ -n "$n" ] || continue
         if [ "$n" = "$INT" ]; then
-            INT_W="$w2"
-            INT_H="$h2"
+            [ "$a" = "1" ] && { INT_W="$w2"; INT_H="$h2"; }
         else
             EXT_NAMES+=("$n")
             EXT_W+=("$w2")
             EXT_H+=("$h2")
+            EXT_ACTIVE+=("$a")
         fi
     done < <(outputs_csv || true)
     if [ "${INT_W}" -lt 1 ]; then INT_W=1366; fi
@@ -65,22 +67,34 @@ notify() {
 }
 
 apply_all() { # posicao ou "desconectar"
-    local pos="$1" i name scale x y
+    local pos="$1" i name x y act=0
     read_outputs
     if [ "${#EXT_NAMES[@]}" -eq 0 ]; then
         notify "Nenhuma tela externa conectada."
         return 0
     fi
     if [ "$pos" = "desconectar" ]; then
-        for name in "${EXT_NAMES[@]}"; do
-            swaymsg output "$name" disable >/dev/null 2>&1 || true
-            log "desconectada: $name"
+        for i in "${!EXT_NAMES[@]}"; do
+            [ "${EXT_ACTIVE[$i]}" = "1" ] || continue
+            swaymsg output "${EXT_NAMES[$i]}" disable >/dev/null 2>&1 || true
+            log "desconectada: ${EXT_NAMES[$i]}"
         done
         notify "Tela(s) externa(s) desconectada(s)."
         return 0
     fi
 
-    swaymsg output "$INT" position 0 0 >/dev/null 2>&1 || true
+    for i in "${!EXT_NAMES[@]}"; do
+        if [ "${EXT_ACTIVE[$i]}" != "1" ]; then
+            swaymsg "output ${EXT_NAMES[$i]} enable" >/dev/null 2>&1 || true
+        fi
+    done
+    sleep 0.3
+    read_outputs
+    for i in "${EXT_ACTIVE[@]}"; do [ "$i" = "1" ] && act=$((act+1)); done
+
+    # Comando como UMA string: coord negativa (esquerda/acima) começando com
+    # '-' vira opcao do swaymsg se passar como argumento separado.
+    swaymsg "output $INT position 0 0" >/dev/null 2>&1 || true
     for i in "${!EXT_NAMES[@]}"; do
         name="${EXT_NAMES[$i]}"
         case "$pos" in
@@ -94,10 +108,10 @@ apply_all() { # posicao ou "desconectar"
         if   [ "${EXT_H[$i]}" -ge 2160 ]; then scale=1.50
         elif [ "${EXT_H[$i]}" -ge 1440 ]; then scale=1.25
         fi
-        swaymsg output "$name" position "$x" "$y" scale "$scale" >/dev/null 2>&1 || true
+        swaymsg "output $name position $x $y scale $scale" >/dev/null 2>&1 || true
         log "aplicado: $name ${x},${y} scale ${scale} (${pos})"
     done
-    notify "Externa ${pos} (escala ${scale}; ${#EXT_NAMES[@]} ativa(s))."
+    notify "Externa ${pos} (escala ${scale}; ${act} ativa(s))."
 }
 
 menu() {
@@ -124,7 +138,9 @@ menu() {
 
 on_bind() {
     read_outputs
-    [ "${#EXT_NAMES[@]}" -eq 0 ] && return 0
+    local i act=0
+    for i in "${EXT_ACTIVE[@]}"; do [ "$i" = "1" ] && act=1; done
+    [ "$act" = "1" ] || return 0
     log "hotplug: detectada(s) ${EXT_NAMES[*]}"
     notify "Detectada: ${EXT_NAMES[*]}"
     menu
@@ -132,7 +148,9 @@ on_bind() {
 
 on_unbind() {
     read_outputs
-    if [ "${#EXT_NAMES[@]}" -eq 0 ]; then
+    local i act=0
+    for i in "${EXT_ACTIVE[@]}"; do [ "$i" = "1" ] && act=1; done
+    if [ "$act" = "0" ]; then
         log "externa(s) desconectada(s)"
         notify "Desconectada."
     fi
@@ -141,7 +159,9 @@ on_unbind() {
 daemon() {
     log "daemon iniciado"
     read_outputs
-    if [ "${#EXT_NAMES[@]}" -gt 0 ]; then
+    local i act=0
+    for i in "${EXT_ACTIVE[@]}"; do [ "$i" = "1" ] && act=1; done
+    if [ "$act" = "1" ]; then
         log "externa(s) presente(s) no start: ${EXT_NAMES[*]}"
         notify "Externa ativa: ${EXT_NAMES[*]} (MOD+p pra posicionar)"
     fi
