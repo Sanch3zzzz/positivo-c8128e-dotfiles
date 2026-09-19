@@ -94,16 +94,23 @@ bindsym $mod+Shift+v exec "cliphist list | wmenu -p 'Copiar:' | cliphist decode 
 
 # Floating (drag de flutuante e controlado pelo drag-window.py, MOD + arrastar)
 bindsym $mod+Shift+space focus mode_toggle
-# Re-tile: joga todas as janelas flutuantes de volta pro layout tiled.
-# SEM aspas: o sway NAO remove quotes no bindsym (com aspas vira comando invalido)
-bindsym $mod+Shift+f [floating] floating disable
+# Re-tile (joga flutuantes pro tiling) ficou sem atalho dedicado; manual:
+#   swaymsg "[floating] floating disable"
 
 # Layout
 bindsym $mod+h splith
 bindsym $mod+v splitv
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+f fullscreen
+bindsym $mod+Shift+t layout toggle split/tabbed
+
+# Fullscreen
+# MOD+f: a janela focada ocupa a tela toda, escondendo as outras -
+# "como se so ela estivesse aberta" (no output atual).
+# MOD+Shift+f: fullscreen GLOBAL, ocupa TODAS as telas (com monitor
+# HDMI ligado, cobre as duas; sem monitor, e igual ao MOD+f).
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f fullscreen toggle global
 bindsym $mod+a focus parent
 
 # Focus
