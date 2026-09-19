@@ -60,6 +60,9 @@ font pango:JetBrainsMono Nerd Font Mono 14
 # Gaps e bordas
 gaps inner 4
 gaps outer 4
+# 1px de borda: a janela FOCADA ganha um anel azul vivaco ($accent2);
+# as demais usam a cor do fundo como borda e "somem" no gap escuro,
+# dando o efeito de "sem borda" nas janelas nao focadas.
 default_border pixel 1
 
 # Tema - Dark Azul Vibrante
@@ -72,10 +75,12 @@ set $accent  #2f66a8
 set $accent2 #00d4ff
 set $urgent  #ff5555
 
-client.focused          $accent  $accent  $fg      $accent  $accent2
-client.focused_inactive $bg-hl   $bg-hl   $fg-dim  $bg-hl   $accent2
-client.unfocused         $bg-alt  $bg-alt  $fg-dim  $bg-alt  $accent2
-client.urgent            $urgent  $urgent  $fg      $urgent  $urgent
+# Borda so aparece na janela focada (azul); nas outras fica da cor do
+# fundo (invisivel contra o gap escuro).
+client.focused          $accent2  $accent2  $fg       $accent2  $accent2
+client.focused_inactive $bg       $bg       $fg-dim   $bg       $bg
+client.unfocused         $bg       $bg       $fg-dim   $bg       $bg
+client.urgent            $urgent   $urgent   $fg       $urgent   $urgent
 
 # Keybinds - Basics
 bindsym $mod+t exec $term
