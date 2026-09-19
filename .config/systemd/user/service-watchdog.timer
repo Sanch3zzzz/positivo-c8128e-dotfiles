@@ -2,7 +2,7 @@
 Description=Checa servicos criticos a cada 10 min
 
 [Timer]
-OnCalendar=*-*-* 00,10,20,30,40,50:00
+OnCalendar=*-*-* *:0/10
 AccuracySec=1min
 Persistent=false
 

@@ -63,8 +63,13 @@ ram="$(free -h 2>/dev/null | awk 'NR==2 {print $3" de "$2}')"
 ok "Disco /" "  ${disk:-?}"
 ok "RAM" "  ${ram:-?}"
 
-# Temperatura da CPU
-temp="$(awk '{printf "%.0f", $1/1000}' /sys/class/thermal/thermal_zone0/temp 2>/dev/null || echo '?')"
+# Temperatura da CPU (evita acpitz/INT3400 que costumam dar 0; usa a
+# primeira zona com leitura valida).
+temp="?"
+for z in /sys/class/thermal/thermal_zone*; do
+    t="$(awk '{printf "%.0f", $1/1000}' "$z/temp" 2>/dev/null || true)"
+    [ -n "$t" ] && [ "$t" -gt 0 ] 2>/dev/null && { temp="$t"; break; }
+done
 ok "Temperatura da CPU" "  ${temp} C"
 
 printf "\n %s(qualquer tecla fecha  |  [PARADO] = veja logs e reinicie)%s\n" "$c_dim" "$rst"

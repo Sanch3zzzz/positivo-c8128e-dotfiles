@@ -40,9 +40,21 @@ autorotate_ok() {
 
 # Proxima execucao de um timer do usuario (formato humano) ou vazio.
 # Ex.: tnext dotfiles-backup
-tnext() {
-    local raw
+tnext() { # <timer> -> proxima execucao (formato humano) ou vazio
+    local raw nxt
     raw=$(systemctl --user show "$1.timer" -p NextElapseUSecRealtime --value 2>/dev/null || true)
-    [[ "$raw" == "n/a" || -z "$raw" ]] && return 1
-    date -d "@$((raw / 1000000))" +'%a %d/%m %H:%M' 2>/dev/null || true
+    [[ "$raw" == "n/a" || -z "$raw" ]] && raw=""
+    if [ -z "$raw" ]; then
+        # Timers com OnBootSec/OnUnitActiveSec nao expoem NextElapseUSecRealtime;
+        # pega a coluna NEXT do list-timers (ja resolvida pelo systemd).
+        nxt=$(systemctl --user list-timers --all --no-legend 2>/dev/null |
+              awk -v t="$1.timer" '$(NF-1)==t {print $1, $2, $3, $4; exit}')
+        [ -n "$nxt" ] && date -d "$nxt" +'%a %d/%m %H:%M' 2>/dev/null || true
+        return
+    fi
+    if [[ "$raw" =~ ^[0-9]+$ ]]; then
+        date -d "@$((raw / 1000000))" +'%a %d/%m %H:%M' 2>/dev/null || true
+    else
+        date -d "$raw" +'%a %d/%m %H:%M' 2>/dev/null || true
+    fi
 }

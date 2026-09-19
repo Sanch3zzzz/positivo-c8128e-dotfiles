@@ -96,3 +96,24 @@ serviço voltar, avisa a restauração.
   `MOD + o`) nem para o serviço nunca iniciado naquela sessão.
 - Estado fica em `/tmp/sway-service-watchdog.state` (evita repetir aviso).
 - Para rodar na hora: `systemctl --user start service-watchdog.service`.
+
+#### Pegadinhas (testadas no aparelho)
+
+- **Timer do watchdog inválido no systemd ≥ 256**: a especificação
+  `OnCalendar=*-*-* 00,10,20,30,40,50:00` **não parseia** ("Timer unit
+  lacks value setting. Refusing") e o timer fica habilitado mas nunca
+  agenda. Use a *step syntax*: `OnCalendar=*-*-* *:0/10`. Confira com
+  `systemd-analyze calendar '*-*-* *:0/10'`.
+- **`systemctl show -p NextElapseUSecRealtime --value`** devolve
+  microssegundos em systemd antigo, mas **texto formatado**
+  ("Sat 2026-09-19 00:40:00 -03") nas versões novas. O `status-lib.sh`
+  (`tnext()`) aceita os dois: se for só dígitos divide por 1e6, senão
+  passa o texto direto para `date -d`.
+- Timers que usam `OnBootSec`/`OnUnitActiveSec` (ex.: `battery-alert`)
+  não expõem `NextElapseUSecRealtime` — o `tnext()` cai para a coluna
+  `NEXT` do `systemctl --user list-timers --all --no-legend` (a coluna
+  `NEXT` tem **4 campos**: `Sat 2026-09-19 00:39:25 -03`; o campo
+  seguinte é o `LEFT`, não faz parte da data).
+- Leitura de temperatura: `thermal_zone0` (acpitz) pode reportar `0`
+  neste hardware; o `system-status.sh` usa a primeira zona thermal com
+  leitura > 0 (x86_pkg_temp).
