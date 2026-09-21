@@ -14,7 +14,7 @@ pacstrap -K /mnt base linux linux-firmware intel-ucode \
 
 ```bash
 sudo pacman -S --needed \
-    sway wayland xorg-xwayland foot wmenu waybar swaybg \
+    sway wayland xorg-xwayland foot wmenu waybar swaybg seatd \
     swaylock mako grim slurp wl-clipboard brightnessctl playerctl \
     mesa iio-sensor-proxy evtest wev \
     pipewire pipewire-alsa pipewire-pulse wireplumber \

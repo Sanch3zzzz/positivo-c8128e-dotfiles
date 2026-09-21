@@ -30,6 +30,30 @@ Edite o arquivo para adicionar mais extensões de vídeo/imagem conforme os
 apps que preferir (o `mimeapps.list` mapeia tipos específicos, não
 wildcards).
 
+> O `mimeapps.list` deste repo usa o `userapp-Floorp-PY6MV3.desktop`? Esse é
+> um ID **gerado pelo xdg** na máquina original, e não existe em outra
+> conta. Depois de instalar o Floorp (e antes de qualquer coisa), rode
+> `xdg-settings set default-web-browser floorp.desktop` para regravar as
+> entradas `http(s)`/`text/html` com o nome de verdade. Se trocar de
+> navegador, use o `.desktop` do seu navegador no mesmo comando.
+
+## 5.4 · Trocar o navegador
+
+O Floorp é o padrão do repo, mas dá pra usar qualquer outro. São dois pontos:
+
+1. **Launchers (MOD + b e menu inicial):**
+   - Crie `~/.config/sway/browser.conf` com `set $browser <seu-navegador>`
+     (ex.: `set $browser firefox`) — o config do sway já faz `include` desse
+     arquivo, então ele sobrescreve o `floorp` padrão automaticamente.
+   - O menu inicial (MOD + m) usa `xdg-open`, então já segue o navegador
+     padrão do sistema.
+2. **Navegador padrão do sistema (links fora do sway):**
+   `xdg-settings set default-web-browser firefox.desktop`
+
+Instalação por repo: Arch → `sudo pacman -S firefox` (ou `chromium`,
+`brave-bin` no AUR, etc.). O daemon de gestos entende switches de aba para
+Floorp e Firefox de fábrica (`touch-gestures.py`, lista `BROWSERS`).
+
 Apps com `Terminal=true` no desktop file usam a variável `$TERMINAL`, que o
 `start-sway` exporta como `foot`.
 

@@ -40,9 +40,9 @@ backup_copy() { # origem destino [sudo]
     "${pfx[@]}" install -Dm644 "$src" "$dst"
 }
 
-ESSENTIAL_BINS=(sway waybar foot wmenu mako grim slurp swaylock swaybg cliphist
-                wl-copy brightnessctl playerctl ydotool notify-send pactl seatd
-                python3)
+ESSENTIAL_BINS=(sway waybar foot wmenu mako grim slurp swaylock swaybg
+                swayidle cliphist wl-copy brightnessctl playerctl ydotool
+                notify-send pactl seatd python3)
 
 # imprime os pacotes faltantes; sai 0 se nao faltar nada.
 missing_bins() {

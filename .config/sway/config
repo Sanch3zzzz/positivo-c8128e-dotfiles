@@ -7,7 +7,10 @@ set $up k
 set $right l
 set $term foot
 set $menu wmenu-run
+# Navegador padrao (MOD + b). Para trocar: crie ~/.config/sway/browser.conf
+# com "set $browser <outro>" (ex.: firefox) que ele sobrescreve este aqui.
 set $browser floorp
+include ~/.config/sway/browser.conf
 set $filemanager thunar
 
 # Output - tela interna

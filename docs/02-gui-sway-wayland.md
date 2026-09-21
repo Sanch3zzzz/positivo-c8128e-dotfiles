@@ -4,7 +4,7 @@
 
 ```bash
 sudo pacman -S --needed \
-    sway wayland xorg-xwayland foot wmenu waybar swaybg \
+    sway wayland xorg-xwayland foot wmenu waybar swaybg seatd \
     swaylock mako grim slurp wl-clipboard brightnessctl playerctl \
     mesa iio-sensor-proxy evtest wev \
     pipewire pipewire-alsa pipewire-pulse wireplumber \
@@ -21,6 +21,7 @@ sudo pacman -S cliphist
 ## 2.2 · seatd (permissões de sessão)
 
 ```bash
+sudo pacman -S seatd
 sudo systemctl enable --now seatd.service
 sudo usermod -aG seat $USER
 ```

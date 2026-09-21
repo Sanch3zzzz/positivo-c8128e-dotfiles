@@ -7,7 +7,7 @@ colors=(-N'#122442' -n'#8aa2c9' -M'#2f66a8' -m'#ffffff' -S'#0a1628' -s'#dfe6f0')
 font='JetBrainsMono Nerd Font Mono 12'
 
 labels=('Terminal'
-        'Navegador (Floorp)'
+        'Navegador'
         'Arquivos (Thunar)'
         'Print de tela'
         'Tela externa (HDMI)'
@@ -17,7 +17,7 @@ labels=('Terminal'
         'Teclado virtual'
         'Ajuda')
 cmds=(foot
-      floorp
+      "xdg-open about:blank"
       thunar
       "$HOME/.config/sway/scripts/screenshot-full.sh"
       "$HOME/.config/sway/scripts/external-display.sh"
