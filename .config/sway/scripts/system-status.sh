@@ -4,6 +4,7 @@
 # sway, unidades do usuario e saude do sistema. Fecha com qualquer tecla.
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
+# shellcheck source=./status-lib.sh
 source "$HERE/status-lib.sh"
 
 c_ok=$'\033[1;32m'; c_bad=$'\033[1;31m'; c_neu=$'\033[2;37m'

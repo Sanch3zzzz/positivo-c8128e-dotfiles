@@ -62,7 +62,7 @@ exemplar específico.
 
 ### Cada `reload` duplica algo (barra, wallpaper)
 É o `exec_always`. Serviços únicos (waybar, swaybg, swayidle) usam `exec`;
-oscripts com `exec_always` precisam de trava própria (o `touch-gestures.py`
+os scripts com `exec_always` precisam de trava própria (o `touch-gestures.py`
 tem `flock`, o `wallpaper-random.sh` dá `pkill -x swaybg`). Não adicione
 `exec_always` em serviço de processo único.
 

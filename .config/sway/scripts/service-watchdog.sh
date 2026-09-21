@@ -4,6 +4,7 @@
 # Estado em /tmp/sway-service-watchdog.state (evita aviso repetido).
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
+# shellcheck source=./status-lib.sh
 source "$HERE/status-lib.sh"
 
 STATE="/tmp/sway-service-watchdog.state"

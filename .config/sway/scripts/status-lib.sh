@@ -49,7 +49,9 @@ tnext() { # <timer> -> proxima execucao (formato humano) ou vazio
         # pega a coluna NEXT do list-timers (ja resolvida pelo systemd).
         nxt=$(systemctl --user list-timers --all --no-legend 2>/dev/null |
               awk -v t="$1.timer" '$(NF-1)==t {print $1, $2, $3, $4; exit}')
-        [ -n "$nxt" ] && date -d "$nxt" +'%a %d/%m %H:%M' 2>/dev/null || true
+        if [ -n "$nxt" ]; then
+            date -d "$nxt" +'%a %d/%m %H:%M' 2>/dev/null || true
+        fi
         return
     fi
     if [[ "$raw" =~ ^[0-9]+$ ]]; then

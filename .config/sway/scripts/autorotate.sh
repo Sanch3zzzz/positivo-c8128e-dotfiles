@@ -62,7 +62,9 @@ stop() {
     local pid=""
     if [[ -f "${PIDFILE}" ]]; then
         pid=$(cat "${PIDFILE}")
-        [[ -n "${pid}" ]] && kill "${pid}" 2>/dev/null || true
+        if [[ -n "${pid}" ]]; then
+            kill "${pid}" 2>/dev/null || true
+        fi
         rm -f "${PIDFILE}"
     fi
     pkill -x monitor-sensor 2>/dev/null || true

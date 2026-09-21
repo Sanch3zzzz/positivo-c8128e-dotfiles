@@ -37,6 +37,8 @@ tar -czf "$DST/dots.tgz" -C "$HOME" "${include[@]}" 2>/dev/null || true
 # Retencao: os nomes sao YYYYMMDD_HHMMSS, entao ordenacao alfabetica ja e
 # cronologica. Apaga os mais antigos alem das KEEP mais recentes.
 old=$(find "$DST_ROOT" -mindepth 1 -maxdepth 1 -type d | sort | head -n -$KEEP)
-[ -z "$old" ] || rm -rf $old
+while IFS= read -r d; do
+    [ -n "$d" ] && rm -rf -- "$d"
+done <<< "$old"
 
 notify-send -t 4000 "Backup dos dotfiles" "Pronto: $(basename "$DST")/dots.tgz" || true

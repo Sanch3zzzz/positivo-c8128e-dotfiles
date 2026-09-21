@@ -52,11 +52,11 @@ O daemon de gestos lê `/dev/input/eventX`. Duas partes:
 ```bash
 git clone https://github.com/<seu-usuario>/positivo-c8128e-dotfiles.git
 cd positivo-c8128e-dotfiles
-./install.sh                 # configs do usuario (preflight + pastas de imagens)
+./install.sh                 # configs do usuário (preflight + pastas de imagens)
 ./install.sh --root          # arquivos de sistema (start-sway, logind, sudoers, zram)
 
 ./install.sh --check         # valida pacotes, grupos, timers e arquivos
-./install.sh --uninstall     # restaura o ultimo backup (o --root desfaz os de sistema)
+./install.sh --uninstall     # restaura o último backup (o --root desfaz os de sistema)
 ```
 
 ## 2.5 · Tela de login ao ligar (greetd + tuigreet)

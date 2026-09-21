@@ -104,7 +104,7 @@ root_files() {
 restore_file() { # destino [sudo]
     local dst="$1" su="${2:-}" newest="" cmd=()
     [ -n "$su" ] && cmd=(sudo)
-    newest="$(ls -1d "${dst}".bak.* 2>/dev/null | sort | tail -1 || true)"
+    newest="$(find "${dst}"*.bak.* -type f 2>/dev/null | sort | tail -1 || true)"
     if [ -z "$newest" ]; then
         if [ -e "$dst" ]; then
             "${cmd[@]}" rm -f "$dst"
@@ -152,28 +152,46 @@ do_check() {
         for b in "${missing[@]}"; do no "pacote: $b"; done
     fi
 
-    id -nG | grep -qw seat && yes "grupo 'seat'" || no "grupo 'seat' (sudo usermod -aG seat \$USER)"
-    id -nG | grep -qw wheel && yes "grupo 'wheel'" || no "grupo 'wheel'"
+    if id -nG | grep -qw seat; then yes "grupo 'seat'"; else no "grupo 'seat' (sudo usermod -aG seat \$USER)"; fi
+    if id -nG | grep -qw wheel; then yes "grupo 'wheel'"; else no "grupo 'wheel'"; fi
 
-    systemctl --user is-enabled battery-alert.timer >/dev/null 2>&1 \
-        && yes "timer alerta de bateria" || no "timer alerta de bateria (systemctl --user enable --now battery-alert.timer)"
-    systemctl --user is-enabled dotfiles-backup.timer >/dev/null 2>&1 \
-        && yes "timer backup de dotfiles" || no "timer backup de dotfiles (systemctl --user enable --now dotfiles-backup.timer)"
-    systemctl --user is-enabled service-watchdog.timer >/dev/null 2>&1 \
-        && yes "watchdog de servicos (10min)" || no "watchdog de servicos (systemctl --user enable --now service-watchdog.timer)"
-    systemctl --user is-enabled ydotool.service >/dev/null 2>&1 \
-        && yes "ydotool.service" || no "ydotool.service (systemctl --user enable --now ydotool.service)"
+    if systemctl --user is-enabled battery-alert.timer >/dev/null 2>&1; then
+        yes "timer alerta de bateria"
+    else
+        no "timer alerta de bateria (systemctl --user enable --now battery-alert.timer)"
+    fi
+    if systemctl --user is-enabled dotfiles-backup.timer >/dev/null 2>&1; then
+        yes "timer backup de dotfiles"
+    else
+        no "timer backup de dotfiles (systemctl --user enable --now dotfiles-backup.timer)"
+    fi
+    if systemctl --user is-enabled service-watchdog.timer >/dev/null 2>&1; then
+        yes "watchdog de servicos (10min)"
+    else
+        no "watchdog de servicos (systemctl --user enable --now service-watchdog.timer)"
+    fi
+    if systemctl --user is-enabled ydotool.service >/dev/null 2>&1; then
+        yes "ydotool.service"
+    else
+        no "ydotool.service (systemctl --user enable --now ydotool.service)"
+    fi
 
-    systemctl is-active greetd.service >/dev/null 2>&1 \
-        && yes "greetd ativo" || no "greetd ativo (systemctl enable --now greetd)"
-    systemctl is-active systemd-oomd.service >/dev/null 2>&1 \
-        && yes "systemd-oomd ativo" || no "systemd-oomd ativo (systemctl enable --now systemd-oomd)"
+    if systemctl is-active greetd.service >/dev/null 2>&1; then
+        yes "greetd ativo"
+    else
+        no "greetd ativo (systemctl enable --now greetd)"
+    fi
+    if systemctl is-active systemd-oomd.service >/dev/null 2>&1; then
+        yes "systemd-oomd ativo"
+    else
+        no "systemd-oomd ativo (systemctl enable --now systemd-oomd)"
+    fi
 
-    ls /dev/zram0 >/dev/null 2>&1 && yes "zram ativo" || no "zram ativo (instale zram-generator e reinicie)"
-    [ -f /etc/systemd/zram-generator.conf ] && yes "zram-generator.conf" || no "zram-generator.conf (./install.sh --root)"
+    if ls /dev/zram0 >/dev/null 2>&1; then yes "zram ativo"; else no "zram ativo (instale zram-generator e reinicie)"; fi
+    if [ -f /etc/systemd/zram-generator.conf ]; then yes "zram-generator.conf"; else no "zram-generator.conf (./install.sh --root)"; fi
 
-    [ -d "$HOME/Images/Wallpapers" ] && yes "pasta ~/Images/Wallpapers" || no "pasta ~/Images/Wallpapers"
-    [ -d "$HOME/Images/Prints" ] && yes "pasta ~/Images/Prints" || no "pasta ~/Images/Prints"
+    if [ -d "$HOME/Images/Wallpapers" ]; then yes "pasta ~/Images/Wallpapers"; else no "pasta ~/Images/Wallpapers"; fi
+    if [ -d "$HOME/Images/Prints" ]; then yes "pasta ~/Images/Prints"; else no "pasta ~/Images/Prints"; fi
 
     if python3 -c 'import json,re,sys; s=open(sys.argv[1]).read(); json.loads(re.sub(r"//.*","",s))' \
         "$HOME/.config/waybar/config.jsonc" >/dev/null 2>&1; then
@@ -182,8 +200,16 @@ do_check() {
         no "JSON do waybar invalido"
     fi
 
-    [ -f /etc/systemd/logind.conf.d/lid.conf ] && yes "logind: tampa (lid)" || no "logind: tampa (lid.conf - ./install.sh --root)"
-    [ -f /etc/systemd/logind.conf.d/power-button.conf ] && yes "logind: botao energia" || no "logind: botao energia (power-button.conf - ./install.sh --root)"
+    if [ -f /etc/systemd/logind.conf.d/lid.conf ]; then
+        yes "logind: tampa (lid)"
+    else
+        no "logind: tampa (lid.conf - ./install.sh --root)"
+    fi
+    if [ -f /etc/systemd/logind.conf.d/power-button.conf ]; then
+        yes "logind: botao energia"
+    else
+        no "logind: botao energia (power-button.conf - ./install.sh --root)"
+    fi
 
     echo
     echo "  Resultado: $ok ok, $fail falha(s)."
@@ -213,9 +239,7 @@ mkdir -p "$HOME/Images/Wallpapers" "$HOME/Images/Prints" "$HOME/Backup/dots"
 
 echo "== Configs do usuario =="
 # sway
-for f in config; do
-    backup_copy "$HERE/.config/sway/$f" "$HOME/.config/sway/$f"
-done
+backup_copy "$HERE/.config/sway/config" "$HOME/.config/sway/config"
 for f in "$HERE"/.config/sway/scripts/*; do
     b="$(basename "$f")"
     backup_copy "$f" "$HOME/.config/sway/scripts/$b"

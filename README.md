@@ -40,12 +40,12 @@ mas quase tudo reaproveitável em qualquer notebook com touchscreen.
 ├── docs/
 │   ├── 00-pacotes.md            # checklist: tudo que precisa instalar
 │   ├── 01-instalacao-arch.md    # Arch do zero (particionamento, base, boot)
-│   ├── 02-gui-sway-wayland.md # seatd, sway, foot, waybar, mako, audio
-│   ├── 03-gestos-touch.md     # daemon de gestos + ydotool + rotação
-│   ├── 04-hardware-extras.md  # BT, energia, relógio, teclas extras
-│   ├── 05-apps.md              # apps, MIME e wallpapers
-│   ├── 06-troubleshooting.md  # FAQ: gestos, audio, brilho, rotacao...
-│   └── 07-ux-amigavel.md    # ajuda, boas-vindas, backup, menu inicial
+│   ├── 02-gui-sway-wayland.md   # seatd, sway, foot, waybar, mako, audio
+│   ├── 03-gestos-touch.md       # daemon de gestos + ydotool + rotação
+│   ├── 04-hardware-extras.md    # BT, energia, relógio, teclas extras
+│   ├── 05-apps.md               # apps, MIME e wallpapers
+│   ├── 06-troubleshooting.md    # FAQ: gestos, audio, brilho, rotacao...
+│   └── 07-ux-amigavel.md        # ajuda, boas-vindas, backup, menu inicial
 ├── .config/                   # configs do usuário (sway, waybar, mako, MIME)
 ├── home/                      # scripts do $HOME (~/.local/bin)
 └── root/                      # arquivos de sistema (referência)
@@ -84,14 +84,18 @@ Ou manualmente, seguindo o `docs/` na ordem. O guia completo começa na
 | `MOD + Space` | Launcher (wmenu) |
 | `MOD + b` / `MOD + e` | Navegador (Floorp) / Arquivos (Thunar) |
 | `MOD + q` | Fecha janela |
-| `MOD + shift + setas` | Move janela |
-| `MOD + shift + i/j/k/l` | Move janela (i=up, k=down, j=left, l=right) |
-| `MOD + shift + ctrl + setas` | Redimensiona (10px) |
+| `MOD + f` | Tela cheia |
+| `MOD + a` | Sobe no container pai (focus parent) |
+| `MOD + Shift + setas` | Move janela |
+| `MOD + Shift + i/j/k/l` | Move janela (i=up, k=down, j=left, l=right) |
+| `MOD + Shift + Ctrl + setas` | Redimensiona (10px) |
+| `MOD + r` | Modo redimensionar (hjkl / setas) |
 | `MOD + arrastar` (btn esq.) | Drag real: reordena janela no tiling (swap) ou move flutuante |
-| `MOD + shift + f` | Joga todas as janelas flutuantes de volta ao tiling |
+| `MOD + Shift + f` | Joga todas as janelas flutuantes de volta ao tiling |
+| `MOD + Shift + Space` | Alterna janela flutuante / tiled |
 | `MOD + h/v/s/w` | Layout split H/V, stacked, tabbed |
 | `MOD + 1..0` | Vai ao workspace 1-10 |
-| `MOD + shift + 1..0` | Move janela ao workspace 1-10 |
+| `MOD + Shift + 1..0` | Move janela ao workspace 1-10 |
 | `MOD + Print` | Screenshot de área (clipboard) |
 | `MOD + Shift + v` | Histórico da área de transferência (cliphist) |
 | Tecla `Positivo` | Print de tela inteira → `~/Images/Prints/` |
@@ -100,8 +104,9 @@ Ou manualmente, seguindo o `docs/` na ordem. O guia completo começa na
 | `MOD + m` | Menu inicial: ações do dia a dia |
 | `MOD + i` | Painel de status: serviços do sway + sistema |
 | `MOD + /` ou `MOD + ?` | Ajuda na tela (atalhos) |
-| `MOD + k` | Teclado virtual (wvkbd-deskintl) — ou pelo botão na waybar (ícone de teclado) |
+| `MOD + k` | Teclado virtual (wvkbd-deskintl) — ou pelo botão na waybar |
 | `MOD + '` | Terminal escorregadio (scratchpad) abre/fecha (tecla esquerda do 1) |
+| `MOD + Shift + e` | Sair do sway (com confirmação) |
 | `Ctrl + Alt + Delete` | Menu de ações: Travar / Suspender / Reiniciar / Desligar / Sair |
 | Tecla `Copilot` | Abre o opencode |
 
