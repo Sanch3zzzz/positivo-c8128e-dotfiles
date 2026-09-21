@@ -41,7 +41,8 @@ backup_copy() { # origem destino [sudo]
 }
 
 ESSENTIAL_BINS=(sway waybar foot wmenu mako grim slurp swaylock swaybg cliphist
-                brightnessctl playerctl ydotool notify-send pactl seatd python3)
+                wl-copy brightnessctl playerctl ydotool notify-send pactl seatd
+                python3)
 
 # imprime os pacotes faltantes; sai 0 se nao faltar nada.
 missing_bins() {
@@ -286,10 +287,17 @@ for f in "$HERE"/home/.local/bin/*; do
 done
 
 echo "== Servicos do usuario =="
-systemctl --user enable --now ydotool.service 2>/dev/null || true
-systemctl --user enable --now battery-alert.timer 2>/dev/null || true
-systemctl --user enable --now dotfiles-backup.timer 2>/dev/null || true
-systemctl --user enable --now service-watchdog.timer 2>/dev/null || true
+if systemctl --user enable --now ydotool.service battery-alert.timer \
+    dotfiles-backup.timer service-watchdog.timer 2>/dev/null; then
+    echo "  OK: servicos e timers do usuario habilitados."
+else
+    echo "  AVISO: nao foi possivel ativar os servicos do usuario (systemctl --user falhou)."
+    echo "  Causa comum: instalando de uma sessao sem user bus (SSH / TTY antes do login)."
+    echo "  Rode de um terminal de sessao normal ou habilite o linger, entao reexecute:"
+    echo "    loginctl enable-linger \$USER"
+    echo "    systemctl --user enable --now ydotool.service battery-alert.timer \\"
+    echo "        dotfiles-backup.timer service-watchdog.timer"
+fi
 
 if [ "$WANT_ROOT" -eq 1 ]; then
     echo "== Arquivos de sistema (sudo interno) =="
