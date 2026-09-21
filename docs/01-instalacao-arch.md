@@ -64,7 +64,7 @@ swapon /dev/mmcblk0p2
 > **Dica:** deixe a partição swap de 4G no lugar como **reserva de
 > emergência** e use **zram** como swap principal (comprimido em RAM: mais
 > rápido e sem desgastar o eMMC). Basta instalar o `zram-generator` e o config
-> do repo (`root/etc/systemd/zram-generator.conf`) — ver `00-pacotes.md` §10.
+> do repo (`root/etc/systemd/zram-generator.conf`) — ver `00-pacotes.md` §9.
 
 ## 1.4 · Base do sistema
 

@@ -43,13 +43,17 @@ mas quase tudo reaproveitável em qualquer notebook com touchscreen.
 │   ├── 02-gui-sway-wayland.md # seatd, sway, foot, waybar, mako, audio
 │   ├── 03-gestos-touch.md     # daemon de gestos + ydotool + rotação
 │   ├── 04-hardware-extras.md  # BT, energia, relógio, teclas extras
-│   ├── 05-apps-ytermusic.md   # apps, MIME, ytermusic, wallpapers
+│   ├── 05-apps.md              # apps, MIME e wallpapers
 │   ├── 06-troubleshooting.md  # FAQ: gestos, audio, brilho, rotacao...
 │   └── 07-ux-amigavel.md    # ajuda, boas-vindas, backup, menu inicial
 ├── .config/                   # configs do usuário (sway, waybar, mako, MIME)
 ├── home/                      # scripts do $HOME (~/.local/bin)
 └── root/                      # arquivos de sistema (referência)
+    ├── etc/greetd/config.toml
     ├── etc/systemd/logind.conf.d/power-button.conf
+    ├── etc/systemd/logind.conf.d/lid.conf
+    ├── etc/systemd/zram-generator.conf
+    ├── etc/systemd/system/user.slice.d/oomd.conf
     ├── etc/sudoers.d/10-celeron-nopasswd
     └── usr/local/bin/start-sway
 ```

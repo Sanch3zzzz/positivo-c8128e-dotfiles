@@ -31,8 +31,8 @@ não incomoda mais (marcador em `~/.config/sway/.welcome-done`).
 ## 7.3 · Menu inicial — `MOD + m`
 
 Launcher estilo "home" com as ações do dia a dia: Terminal, Navegador,
-Arquivos, Print de tela, Tela externa (HDMI), Sistema (energia), Rotação
-automática, Teclado virtual e Ajuda.
+Arquivos, Print de tela, Tela externa (HDMI), Sistema (energia), Status do
+sistema, Rotação automática, Teclado virtual e Ajuda.
 
 - Script: `~/.config/sway/scripts/home-menu.sh`.
 

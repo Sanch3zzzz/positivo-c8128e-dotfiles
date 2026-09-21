@@ -53,7 +53,7 @@ O daemon de gestos lê `/dev/input/eventX`. Duas partes:
 git clone https://github.com/<seu-usuario>/positivo-c8128e-dotfiles.git
 cd positivo-c8128e-dotfiles
 ./install.sh                 # configs do usuario (preflight + pastas de imagens)
-sudo ./install.sh --root     # arquivos de sistema (start-sway, logind, sudoers, zram)
+./install.sh --root          # arquivos de sistema (start-sway, logind, sudoers, zram)
 
 ./install.sh --check         # valida pacotes, grupos, timers e arquivos
 ./install.sh --uninstall     # restaura o ultimo backup (o --root desfaz os de sistema)
@@ -184,7 +184,8 @@ Estrutura (config/scripts) no repo:
   `config` — o waybar **não** procura `config.json`)
 - `~/.config/waybar/style.css`
 - `~/.config/waybar/scripts/network-menu.sh`, `audio-menu.sh`,
-  `bluetooth-menu.sh`, `power-menu.sh`, `vol-step.sh`
+  `bluetooth-menu.sh`, `power-menu.sh`, `vol-step.sh`,
+  `brightness-step.sh`
 
 Continuação: [03 · gestos de toque](03-gestos-touch.md).
 

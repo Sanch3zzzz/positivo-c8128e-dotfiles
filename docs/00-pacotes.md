@@ -52,23 +52,17 @@ sudo pacman -S cliphist
 sudo pacman -S bluez bluez-utils
 ```
 
-## 7 · Apps (ver `05-apps-ytermusic.md`)
+## 7 · Apps (ver `05-apps.md`)
 
 ```bash
 # Repositórios do Arch
-sudo pacman -S thunar thunar-archive-plugin foliate vlc mpv imv micro yt-dlp
+sudo pacman -S thunar thunar-archive-plugin foliate vlc mpv imv micro
 
 # AUR (precisa de um helper como paru/yay)
 paru -S floorp-bin pamac-aur
 ```
 
-## 8 · ytermusic (YouTube Music no terminal — ver `05` seção 5.4)
-
-Compilar do git master (a versão AUR `ytermusic-bin` está quebrada por 403 do
-Google). Precisa de `cargo` (~15 min no Celeron N4500) e autenticação via
-`headers.txt` (cookie — **não** versionado no repo).
-
-## 9 · Manuseio de arquivos no Thunar (compactados/thumbnails/volumes)
+## 8 · Manuseio de arquivos no Thunar (compactados/thumbnails/volumes)
 
 ```bash
 sudo pacman -S ark tumbler thunar-volman gvfs gvfs-mtp gvfs-smb \
@@ -92,7 +86,7 @@ sudo pacman -S ark tumbler thunar-volman gvfs gvfs-mtp gvfs-smb \
   (`.config/qt6ct/qt6ct.conf` com esquema `darker`); env
   `QT_QPA_PLATFORMTHEME=qt6ct` exportada no `start-sway`.
 
-## 10 · Memória, bateria e idle (ver `02`, `03` e `04`)
+## 9 · Memória, bateria e idle (ver `02`, `03` e `04`)
 
 ```bash
 sudo pacman -S zram-generator systemd-oomd swayidle

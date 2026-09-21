@@ -30,13 +30,14 @@ done
 # Helpers
 # ---------------------------------------------------------------------------
 
-backup_copy() { # origem destino
-    local src="$1" dst="$2"
-    if [ -e "$dst" ] && ! diff -q "$src" "$dst" >/dev/null 2>&1; then
-        mv "$dst" "${dst}.bak.${STAMP}"
+backup_copy() { # origem destino [sudo]
+    local src="$1" dst="$2" su="${3:-}" pfx=()
+    [ -n "$su" ] && pfx=(sudo)
+    if [ -e "$dst" ] && ! "${pfx[@]}" diff -q "$src" "$dst" >/dev/null 2>&1; then
+        "${pfx[@]}" mv "$dst" "${dst}.bak.${STAMP}"
         echo "  backup: ${dst}.bak.${STAMP}"
     fi
-    install -Dm644 "$src" "$dst"
+    "${pfx[@]}" install -Dm644 "$src" "$dst"
 }
 
 ESSENTIAL_BINS=(sway waybar foot wmenu mako grim slurp swaylock swaybg cliphist
@@ -85,6 +86,7 @@ user_files() {
     echo "$HOME/.config/swaylock/config"
     echo "$HOME/.config/swayidle/config"
     echo "$HOME/.config/mako/config"
+    echo "$HOME/.config/foot/foot.ini"
     for f in "$HERE"/.config/systemd/user/*; do echo "$HOME/.config/systemd/user/$(basename "$f")"; done
     for f in "$HERE"/home/.local/bin/*; do echo "$HOME/.local/bin/$(basename "$f")"; done
 }
@@ -243,6 +245,9 @@ backup_copy "$HERE/.config/swayidle/config" "$HOME/.config/swayidle/config"
 # mako (notificacoes; OSD de volume/brilho e alerta de bateria usam ele)
 backup_copy "$HERE/.config/mako/config" "$HOME/.config/mako/config"
 
+# foot (terminal)
+backup_copy "$HERE/.config/foot/foot.ini" "$HOME/.config/foot/foot.ini"
+
 # unidades de usuario (timer do alerta de bateria)
 for f in "$HERE"/.config/systemd/user/*; do
     b="$(basename "$f")"
@@ -263,21 +268,21 @@ systemctl --user enable --now dotfiles-backup.timer 2>/dev/null || true
 systemctl --user enable --now service-watchdog.timer 2>/dev/null || true
 
 if [ "$WANT_ROOT" -eq 1 ]; then
-    echo "== Arquivos de sistema (sudo) =="
-    backup_copy "$HERE/root/usr/local/bin/start-sway" /usr/local/bin/start-sway
-    chmod +x /usr/local/bin/start-sway
-    backup_copy "$HERE/root/etc/greetd/config.toml" /etc/greetd/config.toml
+    echo "== Arquivos de sistema (sudo interno) =="
+    backup_copy "$HERE/root/usr/local/bin/start-sway" /usr/local/bin/start-sway sudo
+    sudo chmod +x /usr/local/bin/start-sway
+    backup_copy "$HERE/root/etc/greetd/config.toml" /etc/greetd/config.toml sudo
     backup_copy "$HERE/root/etc/systemd/logind.conf.d/power-button.conf" \
-        /etc/systemd/logind.conf.d/power-button.conf
+        /etc/systemd/logind.conf.d/power-button.conf sudo
     backup_copy "$HERE/root/etc/systemd/logind.conf.d/lid.conf" \
-        /etc/systemd/logind.conf.d/lid.conf
+        /etc/systemd/logind.conf.d/lid.conf sudo
     backup_copy "$HERE/root/etc/systemd/zram-generator.conf" \
-        /etc/systemd/zram-generator.conf
+        /etc/systemd/zram-generator.conf sudo
     backup_copy "$HERE/root/etc/systemd/system/user.slice.d/oomd.conf" \
-        /etc/systemd/system/user.slice.d/oomd.conf
+        /etc/systemd/system/user.slice.d/oomd.conf sudo
     backup_copy "$HERE/root/etc/sudoers.d/10-celeron-nopasswd" \
-        /etc/sudoers.d/10-celeron-nopasswd
-    chmod 440 /etc/sudoers.d/10-celeron-nopasswd
+        /etc/sudoers.d/10-celeron-nopasswd sudo
+    sudo chmod 440 /etc/sudoers.d/10-celeron-nopasswd
     echo "  (sudoers NOPASSWD: confira com 'sudo visudo -c')"
     echo "  (zram/lid/oomd: rode 'sudo systemctl daemon-reload' apos instalar)"
 else

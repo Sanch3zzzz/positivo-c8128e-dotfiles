@@ -31,6 +31,8 @@ MOVE_STEP = 16        # passo de "move" durante arraste de flutuante
 DRAG_ARM  = 14        # movimento minimo p/ considerar arraste
 DRAG_HOLD = 1.0       # segurar antes de arrastar (evita swap ao rolar pagina)
 SWIPE_TH  = 60        # deslocamento p/ swipe de 2 dedos
+STEP_MIN_MS = 28      # throttle entre comandos
+ACTION_COOLDOWN = 0.40  # debounce de workspace
 SWAP_DIST = 100       # deslocamento minimo p/ ativar swap
 TAP_TIME  = 0.25      # max duracao p/ contar como tap
 LONG_PRESS = 0.60     # min duracao p/ segurar = clique direito
