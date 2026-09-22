@@ -6,12 +6,11 @@ flock -n 9 || exit 0
 
 step="${BRIGHTNESS_STEP:-5}"
 case "${1:-up}" in
-    up)   sig="+" ;;
-    down) sig="-" ;;
+    up)   sudo -n brightnessctl s +${step}% >/dev/null 2>&1 || true ;;
+    down) sudo -n brightnessctl s ${step}-% >/dev/null 2>&1 || true ;;
     *)    exit 1 ;;
 esac
 
-brightnessctl set "${sig}${step}%" >/dev/null 2>&1 || true
-
 pct="$(brightnessctl -m get 2>/dev/null | cut -d',' -f5)"
+makoctl dismiss -a 2>/dev/null || true
 notify-send -t 800 -a waybar "Brilho" "${pct}" 2>/dev/null || true

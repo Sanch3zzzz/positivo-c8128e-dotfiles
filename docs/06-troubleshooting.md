@@ -44,10 +44,11 @@ scroll do navegador.
 ## Brilho
 
 ### Setas de brilho / scroll não mudam nada
-- Lista os devices: `brightnessctl -l` (o deste notebook é um backlight
-  ACPI; em outro hardware o nome pode mudar).
+- O `/sys/class/backlight/intel_backlight/brightness` pertence ao root, então `brightnessctl` precisa de sudo.
+- O script `brightness-step.sh` ja usa `sudo brightnessctl set ...`. Se ainda assim não funcionar, verificar se o usuario esta no grupo `wheel`.
 - O passo por scroll é `BRIGHTNESS_STEP` (padrão 5) em
   `~/.config/waybar/scripts/brightness-step.sh`.
+- Notificacoes empilhando: os scripts agora usam `notify-send -r 999` (brilho) e `-r 998` (volume) para substituir a notificacao anterior em vez de criar uma nova.
 
 ## Rotação automática
 

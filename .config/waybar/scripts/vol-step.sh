@@ -22,4 +22,5 @@ v=${v##*/ }
 [ -n "$v" ] || exit 0
 [ "$v" -gt 150 ] && pactl set-sink-volume @DEFAULT_SINK@ 150%
 [ "$v" -lt 0 ]   && pactl set-sink-volume @DEFAULT_SINK@ 0%
+makoctl dismiss -a 2>/dev/null || true
 notify-send -t 800 -a waybar "Volume" "${v}%" 2>/dev/null || true

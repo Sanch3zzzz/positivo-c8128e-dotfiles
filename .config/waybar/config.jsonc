@@ -71,6 +71,7 @@
     },
     "backlight": {
         "format": "{percent}% {icon}",
+        "device": "intel_backlight",
         "format-icons": ["\ue312", "\ue313", "\ue314", "\ue315", "\ue316", "\ue317", "\ue318", "\ue319", "\ue31a"],
         "on-scroll-up": "~/.config/waybar/scripts/brightness-step.sh up",
         "on-scroll-down": "~/.config/waybar/scripts/brightness-step.sh down"
