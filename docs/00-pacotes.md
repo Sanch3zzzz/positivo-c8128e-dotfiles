@@ -118,3 +118,61 @@ instalar tudo acima: `./install.sh` (configs de usuário) e `./install.sh
 --root` (arquivos de sistema: greetd, logind, sudoers, start-sway). Confira
 com `./install.sh --check`; desfaz com `./install.sh --uninstall`. Procurou
 e não achou o erro? Veja `06-troubleshooting.md`.
+## 5 · Firewall (ufw)
+
+> Adicionado posteriormente: firewall essencial pra proteger
+> a máquina, especialmente por UPnP/NAT-PMP não funcionar
+> nesse hardware.
+
+```bash
+sudo pacman -S ufw
+sudo systemctl enable --now ufw
+```
+
+Regras aplicadas:
+```bash
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 1478/tcp    # qBittorrent peer
+sudo ufw allow 1478/udp    # qBittorrent peer UDP
+sudo ufw allow 6771/tcp    # qBittorrent DHT
+sudo ufw allow 6771/udp    # qBittorrent DHT
+sudo ufw allow 6881/tcp    # qBittorrent BitTorrent
+sudo ufw allow 6881/udp    # qBittorrent BitTorrent UDP
+sudo ufw allow from 127.0.0.1 to any port 22    # SSH local
+sudo ufw allow from 192.168.100.0/24 to any port 22  # SSH rede local
+sudo ufw allow from 100.126.120.0/24              # Tailscale
+```
+
+Por que: a porta 1478 do qBittorrent tava aberta pra tudo sem
+firewall, e SSH tava exposto pra internet inteira. Com ufw, só
+o necessário fica liberado.
+
+Arquivos de config: `/etc/ufw/ufw.conf`, `/etc/ufw/before.rules`.
+Status: ativo no boot, logs em `/var/log/ufw.log`.
+
+---
+
+## 6 · Compatibilidade de CPU (polars-runtime-compat)
+
+> Importante pra esse hardware (Intel Celeron N4500).
+
+O pacote `polars` 1.44.2 é compilado com instruções AVX/AVX2/FMA
+que o Celeron N4500 **não possui**. Sem isso, o polars crasha o
+kernel Jupyter com `Illegal instruction`.
+
+Solução: instalar o pacote de compatibilidade:
+```bash
+pip install polars[rtcompat]
+```
+
+Isso instala `polars-runtime-compat` que provê um runtime
+compatibility layer pra CPUs sem AVX.
+
+Variável de ambiente alternativa (fallback):
+```bash
+export POLARS_SKIP_CPU_CHECK=1
+```
+
+---
+
