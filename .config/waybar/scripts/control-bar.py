@@ -83,6 +83,9 @@ class ControlBar(Gtk.Window):
         self.add(box)
         self.show_all()
 
+        # Float and position via swaymsg
+        self.float_window()
+
         # Auto-hide on Escape
         self.connect("key-press-event", self.on_key_press)
         self.connect("destroy", lambda w: self.on_destroy())
@@ -92,6 +95,16 @@ class ControlBar(Gtk.Window):
 
         # Auto-hide after 5s of inactivity
         self.reset_idle()
+
+    def float_window(self):
+        """Make window floating and position it via swaymsg"""
+        try:
+            subprocess.Popen(
+                ["swaymsg", "[title=\"control-bar.py\"] floating enable, move position center 90%, border none"],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+            )
+        except Exception:
+            pass
 
     def reset_idle(self):
         if self.timeout_id:
