@@ -83,6 +83,21 @@ class ControlBar(Gtk.Window):
         self.add(box)
         self.show_all()
 
+        # Set CSS background
+        css = b"""
+        window { background-color: #1a1a2e; border-radius: 8; }
+        scale slider { background-color: #00d2ff; border-radius: 4; min-width: 8px; min-height: 20px; }
+        scale fill { background-color: #00d2ff66; border-radius: 4; }
+        scale trough { background-color: #2a2a3e; border-radius: 4; border: none; }
+        label { color: #e0e0e0; }
+        """
+        provider = Gtk.CssProvider()
+        provider.load_from_data(css)
+        screen = Gdk.Screen.get_default()
+        if screen:
+            ctx = self.get_style_context()
+            ctx.add_provider_for_screen(screen, provider, 600)
+
         # Float and position via swaymsg
         self.float_window()
 
