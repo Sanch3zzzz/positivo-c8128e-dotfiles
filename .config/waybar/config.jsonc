@@ -59,8 +59,8 @@
     "custom/control": {
         "format": "\uf042",
         "tooltip": "Clic para ajustar brilho/volume",
-        "on-click": "~/.config/waybar/scripts/control-bar.sh brightness",
-        "on-click-right": "~/.config/waybar/scripts/control-bar.sh volume",
+        "on-click": "/home/gustavosp/.config/waybar/scripts/control-bar.sh brightness",
+        "on-click-right": "/home/gustavosp/.config/waybar/scripts/control-bar.sh volume",
         "interval": "once"
     },
     "clock": {
