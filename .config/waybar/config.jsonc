@@ -57,7 +57,7 @@
         "on-scroll-down": "~/.config/waybar/scripts/vol-step.sh down"
     },
     "custom/control": {
-        "format": "\uf042 \uf028",
+        "format": "\uf042",
         "tooltip": "Clic para ajustar brilho/volume",
         "on-click": "control-bar.py brightness",
         "on-click-right": "control-bar.py volume",
