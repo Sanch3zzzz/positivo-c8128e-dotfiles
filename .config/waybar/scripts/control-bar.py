@@ -36,7 +36,7 @@ class ControlBar(Gtk.Window):
         screen = Gdk.Screen.get_default()
         if screen:
             geom = screen.get_monitor_geometry(0)
-            self.move(geom.x + (geom.width - BAR_W) // 2, geom.y + geom.height - BAR_H - 40)
+            self.move(geom.x + (geom.width - BAR_W) // 2, geom.y + geom.height - BAR_H - 30)
 
         # Container
         box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=0)
@@ -85,10 +85,10 @@ class ControlBar(Gtk.Window):
 
         # Set CSS background
         css = b"""
-        window { background-color: #1a1a2e; border-radius: 8; }
-        scale slider { background-color: #00d2ff; border-radius: 4; min-width: 8px; min-height: 20px; }
-        scale fill { background-color: #00d2ff66; border-radius: 4; }
-        scale trough { background-color: #2a2a3e; border-radius: 4; border: none; }
+        window { background-color: #1a1a2e; border-radius: 8px; }
+        scale slider { background-color: #00d2ff; border-radius: 4px; min-width: 8px; min-height: 20px; }
+        scale fill { background-color: rgba(0, 210, 255, 0.4); border-radius: 4px; }
+        scale trough { background-color: #2a2a3e; border-radius: 4px; border: none; }
         label { color: #e0e0e0; }
         """
         provider = Gtk.CssProvider()
