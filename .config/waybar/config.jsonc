@@ -56,6 +56,15 @@
         "on-scroll-up": "~/.config/waybar/scripts/vol-step.sh up",
         "on-scroll-down": "~/.config/waybar/scripts/vol-step.sh down"
     },
+    "custom/control": {
+        "format": "\uf042 \uf028",
+        "tooltip": "Clic para ajustar brilho/volume",
+        "on-click": "control-bar.py brightness",
+        "on-click-right": "control-bar.py volume",
+        "on-scroll-up": "~/.config/waybar/scripts/brightness-step.sh up",
+        "on-scroll-down": "~/.config/waybar/scripts/brightness-step.sh down",
+        "interval": "once"
+    },
     "clock": {
         "format": " {:%H:%M}",
         "format-alt": " {:%d/%m/%Y}",
