@@ -10,8 +10,7 @@ Gestos (v4):
                                      precisa segurar ~1.0s antes de arrastar
                                      (senão é scroll da página, nao swap)
   - Deslizar 2 dedos L/R ........ troca de workspace (esq=next, dir=prev)
-  - Deslizar 1 dedo C/B ......... brilho
-  - Deslizar 2 dedos C/B ......... volume
+  - Deslizar 2 dedos C/B ........ volume
   - fullscreen por toque ........ removido (nao funcionava bem)
 
 Precisa ler /dev/input/eventX (roda root automaticamente via sudo -n).
@@ -321,7 +320,6 @@ def main():
                       dist0=None, dist=None, pending_dx=0.0, pending_dy=0.0))
 
     def end_gesture():
-        global last_br_vol_cmd
         nonlocal last_action
         now = time.monotonic()
         log("  fim gesto: %d dedo(s), tx=%.1f ty=%.1f" %
@@ -329,12 +327,7 @@ def main():
         if g["max_fingers"] == 1:
             log("  -> fim drag: dx=%.1f dy=%.1f floater=%s" %
                 (g["dispx"], g["dispy"], g["floater"]))
-            dx, dy = g["dispx"], g["dispy"]
-            is_vertical_swipe = abs(dy) >= SWIPE_TH and abs(dy) >= 2 * abs(dx)
-            if is_vertical_swipe and (now - last_br_vol_cmd) >= STEP_MIN_MS / 1000:
-                brighter_vol("up" if dy < 0 else "down", "brightness")
-                last_br_vol_cmd = now
-            elif g["armed"]:
+            if g["armed"]:
                 if not g["floater"] and (abs(dx) >= SWAP_DIST or
                                             abs(dy) >= SWAP_DIST):
                     do_swap(dx, dy)
