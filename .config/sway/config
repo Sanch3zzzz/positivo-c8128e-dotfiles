@@ -257,4 +257,8 @@ exec swayidle -w -C ~/.config/swayidle/config
 # Menu de acoes do sistema (travar/suspender/reiniciar/desligar/sair)
 bindsym Control+Alt+Delete exec ~/.config/sway/scripts/power-actions.sh
 
+# Config local desta maquina (atalhos pessoais, etc). Nao versionado:
+# ver ~/.config/sway/config.local
+include ~/.config/sway/config.local
+
 include /etc/sway/config.d/*
