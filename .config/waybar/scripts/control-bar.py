@@ -98,8 +98,8 @@ class ControlBar(Gtk.Window):
             ctx = self.get_style_context()
             ctx.add_provider_for_screen(screen, provider, 600)
 
-        # Float and position via swaymsg
-        self.float_window()
+        
+        
 
         # Auto-hide on Escape
         self.connect("key-press-event", self.on_key_press)
@@ -135,7 +135,7 @@ class ControlBar(Gtk.Window):
         self.update_val_label()
 
     def on_key_press(self, widget, event):
-        if event.keyval in (Gdk.KEY_Escape, Gdk.KEY.Return, Gdk.KEY.KP_Enter):
+        if event.keyval in (Gdk.KEY_Escape, Gdk.KEY_Return, Gdk.KEY_KP_Enter):
             self.hide_and_quit()
         elif event.keyval == Gdk.KEY.Left:
             a = self.scale.get_adjustment()
