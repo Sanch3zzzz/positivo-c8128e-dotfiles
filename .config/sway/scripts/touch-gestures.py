@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Daemon de gestos de toque -> sway (Positivo C8128E / FTSC1000).
 
-Gestos (v4):
+Gestos (v3):
   - Tap (toque rapido e parado) .... clique esquerdo no ponto tocado
   - Segurar 1 dedo parado (0.6s) ... clique direito no ponto tocado
   - Arrastar com 1 dedo ......... troca a janela de lugar no tiling
@@ -10,7 +10,6 @@ Gestos (v4):
                                      precisa segurar ~1.0s antes de arrastar
                                      (senão é scroll da página, nao swap)
   - Deslizar 2 dedos L/R ........ troca de workspace (esq=next, dir=prev)
-  - Deslizar 2 dedos C/B ........ volume
   - fullscreen por toque ........ removido (nao funcionava bem)
 
 Precisa ler /dev/input/eventX (roda root automaticamente via sudo -n).
@@ -347,16 +346,10 @@ def main():
                     log("  -> segurar = clique direito @%.0f,%.0f (%.2fs)" % (x, y, duration))
         elif g["max_fingers"] >= 2 and (now - last_action) > ACTION_COOLDOWN:
             dx, dy = g["dispx"], g["dispy"]
-            is_horizontal = abs(dx) >= SWIPE_TH and abs(dx) >= 2 * abs(dy)
-            is_vertical = abs(dy) >= SWIPE_TH and abs(dy) >= 2 * abs(dx)
-            if is_horizontal:
+            if abs(dx) >= SWIPE_TH and abs(dx) >= 2 * abs(dy):
                 sway("workspace next" if dx < 0 else "workspace prev")
                 last_action = now
                 log("  -> workspace %s" % ("next" if dx < 0 else "prev"))
-            elif is_vertical:
-                brighter_vol("up" if dy < 0 else "down", "volume")
-                last_action = now
-                log("  -> %s" % ("volume up" if dy < 0 else "volume down"))
         reset()
 
     for event in dev.read_loop():
