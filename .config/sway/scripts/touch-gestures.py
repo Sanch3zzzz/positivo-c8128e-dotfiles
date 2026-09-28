@@ -4,11 +4,11 @@
 Gestos (v3):
   - Tap (toque rapido e parado) .... clique esquerdo no ponto tocado
   - Segurar 1 dedo parado (0.6s) ... clique direito no ponto tocado
-  - Arrastar com 1 dedo ......... troca a janela de lugar no tiling
-                                     (swap p/ o vizinho; se a janela ja era
-                                     flutuante, move ela livremente)
-                                     precisa segurar ~1.0s antes de arrastar
-                                     (senão é scroll da página, nao swap)
+- Arrastar com 1 dedo ......... troca a janela de lugar no tiling
+                                    (swap p/ o vizinho; se a janela ja era
+                                    flutuante, move ela livremente)
+                                    precisa segurar ~1.0s antes de arrastar
+                                    (senão é scroll da página, nao swap)
   - Deslizar 2 dedos L/R ........ troca de workspace (esq=next, dir=prev)
   - fullscreen por toque ........ removido (nao funcionava bem)
 
@@ -43,13 +43,6 @@ SWAP_DIST = 100         # deslocamento minimo p/ ativar o swap no drag
 TAP_TIME = 0.25         # max duracao p/ contar como tap (clique esquerdo)
 LONG_PRESS = 0.60       # min duracao p/ segurar parado = clique direito
 TAP_MOVE = 12           # movimento max p/ contar como toque parado
-
-# Gestos de brilho/volume por toque
-BRIGHTNESS_STEP = 5     # % por swipe de brilho
-VOL_STEP = 1            # % por swipe de volume
-BRIGHTNESS_SCRIPT = os.path.expanduser("~/.config/waybar/scripts/brightness-step.sh")
-VOL_SCRIPT = os.path.expanduser("~/.config/waybar/scripts/vol-step.sh")
-last_br_vol_cmd = 0.0   # timestamp do ultimo comando de brilho/volume
 
 # Daemon do ydotool (user service, socket DGRAM em /run/user/<uid>/).
 # NAO fixa uid: descoberto por glob (aguenta re-exec via sudo -n e outra conta).
@@ -144,24 +137,12 @@ def click(button, x, y):
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-def brighter_vol(direction, mode):
-    global last_br_vol_cmd
-    now = time.monotonic()
-    if now - last_br_vol_cmd < STEP_MIN_MS / 1000:
-        return
-    last_br_vol_cmd = now
-    script = BRIGHTNESS_SCRIPT if mode == "brightness" else VOL_SCRIPT
-    cmd = [script, direction]
-    subprocess.run(cmd, timeout=3, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    log("  -> %s: %s" % ("brilho" if mode == "brightness" else "volume", direction))
-
-
 # Apps que convertem toque em clique por conta propria (Chromium/Gecko).
 # Nesse caso o tap do daemon NAO deve clicar, senao vira clique duplo.
 BROWSERS = {"floorp", "org.mozilla.floorp", "firefox", "org.mozilla.firefox",
-             "chromium", "google-chrome", "brave", "librewolf", "zen",
-             "waterfox", "microsoft-edge", "vivaldi", "opera",
-             "epiphany", "org.gnome.Epiphany"}
+            "chromium", "google-chrome", "brave", "librewolf", "zen",
+            "waterfox", "microsoft-edge", "vivaldi", "opera",
+            "epiphany", "org.gnome.Epiphany"}
 
 
 def browser_focused():
@@ -327,12 +308,12 @@ def main():
             log("  -> fim drag: dx=%.1f dy=%.1f floater=%s" %
                 (g["dispx"], g["dispy"], g["floater"]))
             if g["armed"]:
-                if not g["floater"] and (abs(dx) >= SWAP_DIST or
-                                            abs(dy) >= SWAP_DIST):
-                    do_swap(dx, dy)
+                if not g["floater"] and (abs(g["dispx"]) >= SWAP_DIST or
+                                         abs(g["dispy"]) >= SWAP_DIST):
+                    do_swap(g["dispx"], g["dispy"])
             else:
                 x, y = g["first"][0]
-                moved = (dx ** 2 + dy ** 2) ** 0.5
+                moved = (g["dispx"] ** 2 + g["dispy"] ** 2) ** 0.5
                 duration = now - g["t0"]
                 if moved < TAP_MOVE and duration < TAP_TIME:
                     if browser_focused():
