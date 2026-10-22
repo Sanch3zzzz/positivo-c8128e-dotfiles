@@ -23,6 +23,7 @@ row "MOD + t"           "Terminal (foot)"
 row "MOD + Space"       "Launcher de apps (wmenu)"
 row "MOD + b / e"       "Navegador (Floorp) / Arquivos (Thunar)"
 row "MOD + m"           "Menu inicial (acoes do dia a dia)"
+row "MOD + Esc"         "Gerenciamento (energia/conta/sistema)"
 row "MOD + / ou ?"      "Esta ajuda"
 
 sec "Janelas"
@@ -30,15 +31,10 @@ row "MOD + q"           "Fecha a janela"
 row "MOD + setas"       "Move o foco"
 row "MOD + Shift + setas"   "Move a janela"
 row "MOD + Shift + Ctrl + setas" "Redimensiona (10px)"
-<<<<<<< HEAD
 row "MOD + f"           "So essa janela (fullscreen)"
 row "MOD + Shift + f"   "Fullscreen em todas as telas"
 row "MOD + Shift + space"   "Janela flutuante / tiled"
 row "MOD + a"           "Sobe no container pai"
-=======
-row "MOD + f"           "So essa janela (fullscreen)"
-row "MOD + Shift + f"   "Fullscreen em todas as telas"
->>>>>>> 9e53d67 (sway: fullscreen MOD+f (janela) e MOD+Shift+f (global, todas as telas) + elimina re-tile do atalho (vira manual))
 row "MOD + h / v / s / w"    "Layout: split H, split V, pilha, abas"
 row "MOD + arrastar"    "Reordena janela (swap no tiling)"
 

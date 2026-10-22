@@ -8,8 +8,13 @@ sudo pacman -S --needed \
     swaylock mako grim slurp wl-clipboard brightnessctl playerctl \
     mesa iio-sensor-proxy evtest wev \
     pipewire pipewire-alsa pipewire-pulse wireplumber \
-    noto-fonts ttf-dejavu ttf-jetbrains-mono-nerd
+    noto-fonts ttf-dejavu ttf-jetbrains-mono-nerd \
+    gtk3 python-gobject
 ```
+
+O `gtk3` + `python-gobject` são usados pela **tela de gerenciamento**
+(`MOD + Esc`, §2.11). O `gtk3` costuma vir junto com o Thunar; o
+`python-gobject` precisa ser instalado explicitamente.
 
 O `wl-clipboard` fornece os comandos `wl-copy`/`wl-paste` (clipboard do
 Wayland). Para **histórico da área de transferência**, instale também:
@@ -279,6 +284,12 @@ O sway sobe o `swayidle -w -C ~/.config/swayidle/config` junto com o mako:
 Abre o `power-actions.sh` (wmenu): **Travar / Suspender / Reiniciar /
 Desligar / Sair**. Reiniciar/Desligar/Sair pedem confirmação via swaynag.
 O `MOD + Shift + e` continua sendo o sair direto.
+
+Para o dia a dia (e para o toque) existe a **tela de gerenciamento**
+(`MOD + Esc`): painel GTK flutuante com botões de travar, suspender, trocar
+de conta (volta ao tuigreet), modo de energia, status, ajuda, reiniciar e
+desligar. Script: `~/.config/sway/scripts/manager-screen.py`; detalhes em
+`docs/07-ux-amigavel.md` §7.6.
 
 ### Alerta de bateria baixa
 

@@ -11,7 +11,7 @@ labels=('Terminal'
         'Arquivos (Thunar)'
         'Print de tela'
         'Tela externa (HDMI)'
-        'Sistema (energia)'
+        'Gerenciamento (energia/conta)'
         'Status do sistema'
         'Rotacao automatica'
         'Teclado virtual'
@@ -21,7 +21,7 @@ cmds=(foot
       thunar
       "$HOME/.config/sway/scripts/screenshot-full.sh"
       "$HOME/.config/sway/scripts/external-display.sh"
-      "$HOME/.config/sway/scripts/power-actions.sh"
+      "$HOME/.config/sway/scripts/manager-screen.py"
       "foot --app-id=status $HOME/.config/sway/scripts/system-status.sh"
       "$HOME/.config/sway/scripts/autorotate.sh"
       "$HOME/.config/sway/scripts/toggle-osk.sh"

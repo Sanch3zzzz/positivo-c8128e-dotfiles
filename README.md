@@ -13,7 +13,8 @@ Configurações e guia **passo a passo completo** para deixar esse notebook
 - Controle de energia por software (governor + teto de frequência)
 - Idle inteligente: trava a tela, apaga e suspende sozinho (swayidle) + alerta de bateria baixa
 - Experiência amigável: ajuda na tela (`MOD + /` ou `?`), boas-vindas no
-  1º login, menu inicial (`MOD + m`), painel de status (`MOD + i`),
+  1º login, menu inicial (`MOD + m`), tela de gerenciamento (`MOD + Esc`,
+  energia/sessão/sistema), painel de status (`MOD + i`),
   watchdog que avisa se um serviço cair e backup automático dos configs
 - Bluetooth, Wi-Fi, áudio e mídia tudo pela barra (waybar)
 
@@ -102,6 +103,7 @@ Ou manualmente, seguindo o `docs/` na ordem. O guia completo começa na
 | `MOD + o` | Liga/desliga rotação automática (giroscópio) |
 | `MOD + p` | Posição da tela externa HDMI (Direita/Esquerda/Acima/Abaixo/Desconectar) |
 | `MOD + m` | Menu inicial: ações do dia a dia |
+| `MOD + Esc` | Tela de gerenciamento: travar/suspender/trocar conta/energia/status/ajuda/reiniciar/desligar |
 | `MOD + i` | Painel de status: serviços do sway + sistema |
 | `MOD + /` ou `MOD + ?` | Ajuda na tela (atalhos) |
 | `MOD + k` | Teclado virtual (wvkbd-deskintl) — ou pelo botão na waybar |

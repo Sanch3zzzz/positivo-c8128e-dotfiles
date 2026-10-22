@@ -232,6 +232,13 @@ for_window [app_id="status"] floating enable, move position center
 for_window [app_id="status"] resize set 1100px 90ppt
 bindsym $mod+i exec foot --app-id=status ~/.config/sway/scripts/system-status.sh
 
+# Tela de gerenciamento (energia, sessao e sistema) - mod+Esc
+# Painel GTK flutuante/centralizado; tambem abre pelo icone de engrenagem
+# na waybar.
+for_window [app_id="manager"] floating enable, move position center
+for_window [app_id="manager"] resize set 720px 580px
+bindsym $mod+Escape exec ~/.config/sway/scripts/manager-screen.py
+
 # Menu inicial (acao do dia a dia) - mod+m
 bindsym $mod+m exec ~/.config/sway/scripts/home-menu.sh
 

@@ -51,6 +51,9 @@ missing_bins() {
         command -v "$b" >/dev/null 2>&1 || m+=("$b")
     done
     python3 -c 'import evdev' >/dev/null 2>&1 || m+=("python-evdev")
+    python3 -c 'import gi' >/dev/null 2>&1 || m+=("python-gobject")
+    python3 -c 'import gi; gi.require_version("Gtk", "3.0"); from gi.repository import Gtk' \
+        >/dev/null 2>&1 || m+=("gtk3")
     if [ "${#m[@]}" -eq 0 ]; then
         return 0
     fi

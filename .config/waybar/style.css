@@ -64,14 +64,14 @@ tooltip label {
     padding: 0 10px;
 }
 
-#network, #clock, #cpu, #memory, #battery, #pulseaudio, #bluetooth, #custom-power, #custom-osk {
+#network, #clock, #cpu, #memory, #battery, #pulseaudio, #bluetooth, #custom-manager, #custom-power, #custom-osk {
     padding: 0 10px;
     color: #ffffff;
     background-color: #122442;
     margin: 3px 2px;
 }
 
-#network:hover, #pulseaudio:hover, #cpu:hover, #memory:hover, #battery:hover, #bluetooth:hover, #custom-power:hover, #custom-osk:hover {
+#network:hover, #pulseaudio:hover, #cpu:hover, #memory:hover, #battery:hover, #bluetooth:hover, #custom-manager:hover, #custom-power:hover, #custom-osk:hover {
     background-color: #1c3055;
 }
 
@@ -129,6 +129,11 @@ tooltip label {
 
 #battery.charging {
     color: #00d4ff;
+}
+
+#custom-manager {
+    color: #00d4ff;
+    font-size: 14px;
 }
 
 #custom-power {

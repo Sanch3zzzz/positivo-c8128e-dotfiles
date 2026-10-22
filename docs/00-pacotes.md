@@ -18,8 +18,13 @@ sudo pacman -S --needed \
     swaylock mako grim slurp wl-clipboard brightnessctl playerctl \
     mesa iio-sensor-proxy evtest wev \
     pipewire pipewire-alsa pipewire-pulse wireplumber \
-    noto-fonts ttf-dejavu ttf-jetbrains-mono-nerd
+    noto-fonts ttf-dejavu ttf-jetbrains-mono-nerd \
+    gtk3 python-gobject
 ```
+
+> `gtk3` + `python-gobject` = **tela de gerenciamento** (`MOD + Esc`), painel
+> GTK com os botões de energia/sessão. O `gtk3` normalmente já vem com o
+> Thunar, mas o `python-gobject` precisa ser instalado.
 
 ## 3 · Gestos de toque (ver `02` e `03-gestos-touch.md`)
 

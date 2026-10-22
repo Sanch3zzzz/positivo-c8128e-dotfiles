@@ -117,3 +117,28 @@ serviço voltar, avisa a restauração.
 - Leitura de temperatura: `thermal_zone0` (acpitz) pode reportar `0`
   neste hardware; o `system-status.sh` usa a primeira zona thermal com
   leitura > 0 (x86_pkg_temp).
+
+## 7.6 · Tela de gerenciamento — `MOD + Esc`
+
+Painel **GTK3** flutuante e centralizado (também abre pelo ícone de
+engrenagem ⚙ na waybar) com botões grandes, pensados para o toque:
+
+| Botão | O que faz |
+|---|---|
+| **Travar** | `swaylock -f` (mesmo tema do idle) |
+| **Suspender** | trava a tela e chama `systemctl suspend` |
+| **Trocar conta** | `swaymsg exit` → volta ao **tuigreet**, onde dá para escolher outro usuário |
+| **Modo de energia** | alterna Performance → Balanceado → Economia (usa o `power-menu.sh`) |
+| **Status do sistema** | abre o mesmo painel do `MOD + i` |
+| **Ajuda** | abre a mesma ajuda do `MOD + /` |
+| **Reiniciar** / **Desligar** | pedem confirmação num diálogo antes de executar |
+
+O cabeçalho mostra usuário@máquina, bateria (com estado) e relógio/data.
+Fecha com `Esc` ou com o **X** no canto — sem clique acidental em "Desligar":
+as ações destrutivas só rodam depois da confirmação.
+
+- Script: `~/.config/sway/scripts/manager-screen.py`.
+- Regra do sway: `for_window [app_id="manager"] floating enable, move
+  position center` + `resize set 720px 580px`.
+- Dependências: `gtk3` e `python-gobject` (`docs/00-pacotes.md` §2).
+- Depois de instalar os pacotes: `swaymsg reload` e `MOD + Esc`.

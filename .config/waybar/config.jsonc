@@ -5,7 +5,7 @@
     "spacing": 4,
     "modules-left": ["custom/menu", "sway/workspaces"],
     "modules-center": ["sway/window"],
-    "modules-right": ["network", "bluetooth", "custom/osk", "pulseaudio", "cpu", "memory", "backlight", "battery", "custom/power", "clock"],
+    "modules-right": ["network", "bluetooth", "custom/osk", "pulseaudio", "cpu", "memory", "backlight", "battery", "custom/manager", "custom/power", "clock"],
     "custom/menu": {
         "format": "\uf0c9",
         "on-click": "wmenu-run",
@@ -88,6 +88,11 @@
         "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh",
         "on-click-right": "bluetoothctl power off",
         "on-click-middle": "bluetoothctl power on"
+    },
+    "custom/manager": {
+        "format": "\uf013",
+        "tooltip": "Gerenciamento: energia, sessão e sistema (MOD + Esc)",
+        "on-click": "~/.config/sway/scripts/manager-screen.py"
     },
     "custom/power": {
         "format": "{}",

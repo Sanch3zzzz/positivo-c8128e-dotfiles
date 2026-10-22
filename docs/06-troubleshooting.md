@@ -99,6 +99,25 @@ No ABNT2 a tecla é a **à esquerda do `1`** (produz `'`/`"`, keysym
 Não abre? Faltam `wmenu`/`swaynag` (parte do `sway`/`wmenu`). O script é
 `~/.config/sway/scripts/power-actions.sh`.
 
+## Tela de gerenciamento (`MOD + Esc`)
+
+Não abre? Confira as dependências do painel GTK:
+
+```bash
+python3 -c 'import gi; gi.require_version("Gtk", "3.0"); from gi.repository import Gtk'
+```
+
+Se der erro, instale `gtk3` e `python-gobject`; depois `swaymsg reload`.
+A janela deve casar com a regra `app_id="manager"` (confira com
+`swaymsg -t get_tree | grep -A2 manager`). Para testar fora do sway:
+
+```bash
+~/.config/sway/scripts/manager-screen.py
+```
+
+O botão **Trocar conta** encerra a sessão (`swaymsg exit`): com o greetd,
+isso volta ao tuigreet para escolher outro usuário.
+
 ## Instalação
 
 ### Tela preta no primeiro boot
