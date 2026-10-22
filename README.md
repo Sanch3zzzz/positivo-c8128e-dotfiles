@@ -62,7 +62,7 @@ mas quase tudo reaproveitável em qualquer notebook com touchscreen.
 ## Início rápido (pós-Arch instalado)
 
 ```bash
-git clone https://github.com/<seu-usuario>/positivo-c8128e-dotfiles.git
+git clone https://github.com/Sanch3zzzz/positivo-c8128e-dotfiles.git
 cd positivo-c8128e-dotfiles
 ./install.sh            # instala configs do usuario (mostra faltantes)
 ./install.sh --root     # arquivos de sistema: greetd, logind, sudoers, zram

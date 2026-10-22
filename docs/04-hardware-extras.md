@@ -36,14 +36,14 @@ O bar usa `~/.config/waybar/scripts/power-menu.sh`:
 
 O script precisa de root para escrever em
 `/sys/devices/system/cpu/cpufreq/policy*` → é o motivo do NOPASSWD no
-sudoers (configurado em [01 · dentro do chroot](01-instalacao-arch.md#15-dentro-do-chroot)).
+sudoers (configurado em [01 · dentro do chroot](01-instalacao-arch.md#15--dentro-do-chroot)).
 
-Opção mais restrita que o `%wheel NOPASSWD: ALL`: criar um NOPASSWD só para
-o power-menu:
-
-```
-gustavosp ALL=(ALL) NOPASSWD: /home/<user>/.config/waybar/scripts/power-menu.sh
-```
+> **Atenção:** liberar só o `power-menu.sh` **não** basta. O script chama
+> `sudo tee` internamente, o `brightness-step.sh` chama
+> `sudo -n brightnessctl` e os scripts de gestos/arraste reexecutam via
+> `sudo -n python3 ...`. Para restringir de verdade, libere também esses
+> comandos (com cuidado com wildcards no sudoers) ou mantenha o NOPASSWD
+> amplo, consciente do risco.
 
 ## 4.3 · Botão de energia e tampa (lid)
 

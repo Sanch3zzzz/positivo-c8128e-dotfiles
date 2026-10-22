@@ -119,11 +119,13 @@ systemctl --user enable --now battery-alert.timer   # unidades: ./install.sh
 ---
 
 **Nota:** o `install.sh` **não instala pacotes** — só copia configs. Depois de
-instalar tudo acima: `./install.sh` (configs de usuário) e `./install.sh
---root` (arquivos de sistema: greetd, logind, sudoers, start-sway). Confira
-com `./install.sh --check`; desfaz com `./install.sh --uninstall`. Procurou
-e não achou o erro? Veja `06-troubleshooting.md`.
-## 5 · Firewall (ufw)
+instalar o que precisa acima: `./install.sh` (configs de usuário) e
+`./install.sh --root` (arquivos de sistema: greetd, logind, sudoers,
+start-sway). Confira com `./install.sh --check`; desfaz com
+`./install.sh --uninstall`. Procurou e não achou o erro? Veja
+`06-troubleshooting.md`.
+
+## 10 · Firewall (ufw)
 
 > Adicionado posteriormente: firewall essencial pra proteger
 > a máquina, especialmente por UPnP/NAT-PMP não funcionar
@@ -158,7 +160,7 @@ Status: ativo no boot, logs em `/var/log/ufw.log`.
 
 ---
 
-## 6 · Compatibilidade de CPU (polars-runtime-compat)
+## 11 · Compatibilidade de CPU (polars-runtime-compat)
 
 > Importante pra esse hardware (Intel Celeron N4500).
 

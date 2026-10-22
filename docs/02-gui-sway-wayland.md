@@ -56,7 +56,7 @@ O daemon de gestos lê `/dev/input/eventX`. Duas partes:
 ## 2.4 · Instalar os dotfiles
 
 ```bash
-git clone https://github.com/<seu-usuario>/positivo-c8128e-dotfiles.git
+git clone https://github.com/Sanch3zzzz/positivo-c8128e-dotfiles.git
 cd positivo-c8128e-dotfiles
 ./install.sh                 # configs do usuário (preflight + pastas de imagens)
 ./install.sh --root          # arquivos de sistema (start-sway, logind, sudoers, zram)

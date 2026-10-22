@@ -37,7 +37,7 @@ wildcards).
 > entradas `http(s)`/`text/html` com o nome de verdade. Se trocar de
 > navegador, use o `.desktop` do seu navegador no mesmo comando.
 
-## 5.4 · Trocar o navegador
+## 5.3 · Trocar o navegador
 
 O Floorp é o padrão do repo, mas dá pra usar qualquer outro. São dois pontos:
 
@@ -57,7 +57,7 @@ Floorp e Firefox de fábrica (`touch-gestures.py`, lista `BROWSERS`).
 Apps com `Terminal=true` no desktop file usam a variável `$TERMINAL`, que o
 `start-sway` exporta como `foot`.
 
-## 5.3 · Wallpapers
+## 5.4 · Wallpapers
 
 - Wallpapers em `~/Images/Wallpapers/` (aleatório no início do sway)
 - `~/.local/bin/wallpaper-random.sh` escolhe um e aplica via `swaybg`
