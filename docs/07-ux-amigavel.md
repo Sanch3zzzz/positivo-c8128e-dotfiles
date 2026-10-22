@@ -47,7 +47,7 @@ recentes**.
 - `dotfiles-backup.service` roda o script com prioridade baixa
   (`Nice=19`, `IOSchedulingClass=idle`) para não pesar no Celeron.
 - O que entra no tarball: `.config/{sway,waybar,mako,swayidle,swaylock,
-  systemd,qt6ct,mimeapps.list}`, `~/.local/bin` e `~/Images`.
+  foot,systemd,qt6ct,mimeapps.list}`, `~/.local/bin` e `~/Images`.
 
 Para rodar/inspecionar manualmente:
 

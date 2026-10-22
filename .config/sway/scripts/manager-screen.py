@@ -5,6 +5,7 @@
 #
 # Dependencias: gtk3 + python-gobject (ver docs/00-pacotes.md).
 import getpass
+import glob
 import os
 import socket
 import subprocess
@@ -298,8 +299,9 @@ class Manager:
 
         user = getpass.getuser()
         host = socket.gethostname()
-        cap = read("/sys/class/power_supply/BAT0/capacity")
-        status = read("/sys/class/power_supply/BAT0/status")
+        bat = sorted(glob.glob("/sys/class/power_supply/BAT*"))
+        cap = read(os.path.join(bat[0], "capacity")) if bat else ""
+        status = read(os.path.join(bat[0], "status")) if bat else ""
         parts = [f"{user}@{host}"]
         if cap:
             battery = f"bateria {cap}%"

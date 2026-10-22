@@ -16,6 +16,7 @@ ITEMS=(.config/sway
        .config/mako
        .config/swayidle
        .config/swaylock
+       .config/foot
        .config/systemd
        .config/qt6ct
        .config/mimeapps.list
@@ -30,9 +31,13 @@ done
 [ "${#include[@]}" -eq 0 ] && exit 0
 
 mkdir -p "$DST"
-# tar evita dependencias novas (rsync nao e garantido). Desvio de erro: a
-# flag -f preserva retorno 0 se algum arquivo sumir no meio do backup.
-tar -czf "$DST/dots.tgz" -C "$HOME" "${include[@]}" 2>/dev/null || true
+# tar evita dependencias novas (rsync nao e garantido). Se falhar (disco
+# cheio, arquivo sumindo no meio etc.), avisa e nao poda backups antigos.
+if ! tar -czf "$DST/dots.tgz" -C "$HOME" "${include[@]}" 2>/dev/null; then
+    notify-send -u critical -t 10000 "Backup dos dotfiles" \
+        "Falhou: veja o espaco em disco." 2>/dev/null || true
+    exit 1
+fi
 
 # Retencao: os nomes sao YYYYMMDD_HHMMSS, entao ordenacao alfabetica ja e
 # cronologica. Apaga os mais antigos alem das KEEP mais recentes.

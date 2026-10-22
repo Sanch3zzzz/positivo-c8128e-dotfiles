@@ -83,7 +83,7 @@ start() {
         monitor-sensor --accel | while IFS= read -r line; do
             lc="${line,,}"
             case "${lc}" in
-                *"orientation changed:"* | \*orientation:*)
+                *"orientation changed:"*)
                     orient="${line##* }"
                     case "${orient}" in
                         normal|left-up|right-up|bottom-up)

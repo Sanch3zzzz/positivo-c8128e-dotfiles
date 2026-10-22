@@ -142,7 +142,7 @@ def click(button, x, y):
 BROWSERS = {"floorp", "org.mozilla.floorp", "firefox", "org.mozilla.firefox",
             "chromium", "google-chrome", "brave", "librewolf", "zen",
             "waterfox", "microsoft-edge", "vivaldi", "opera",
-            "epiphany", "org.gnome.Epiphany"}
+            "epiphany", "org.gnome.epiphany"}
 
 
 def browser_focused():
