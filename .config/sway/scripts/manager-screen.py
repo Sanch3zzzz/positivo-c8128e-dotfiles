@@ -373,7 +373,13 @@ def execute(action):
     if action == "lock":
         run(["swaylock", "-f"])
     elif action == "suspend":
-        run(["swaylock", "-f"])
+        # Assincrono de proposito: subprocess.run esperaria o swaylock sair
+        # (ou seja, so suspenderia depois do desbloqueio).
+        try:
+            subprocess.Popen(["swaylock", "-f"])
+        except OSError as exc:
+            notify_error(f"Falha ao travar a tela: {exc}")
+            return
         time.sleep(0.6)
         run(["systemctl", "suspend"])
     elif action == "switch":

@@ -11,6 +11,7 @@ case "${1:-up}" in
     *)    exit 1 ;;
 esac
 
-pct="$(brightnessctl -m get 2>/dev/null | cut -d',' -f5)"
+pct="$(brightnessctl -m info 2>/dev/null | cut -d',' -f4)"
+[ -n "$pct" ] || exit 0
 makoctl dismiss -a 2>/dev/null || true
 notify-send -t 800 -a waybar "Brilho" "${pct}" 2>/dev/null || true
