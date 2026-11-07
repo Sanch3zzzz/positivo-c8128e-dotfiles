@@ -59,11 +59,9 @@ font pango:JetBrainsMono Nerd Font Mono 14
 
 # Gaps e bordas
 gaps inner 4
-gaps outer 4
-# Tela pequena (1366x768): margem menor em cima e embaixo; laterais seguem 4.
+# Tela pequena (1366x768): margem externa minima (1px) em todos os lados.
 # O outer aceita valor por lado (top/right/bottom/left); o inner e uniforme.
-gaps top 2
-gaps bottom 2
+gaps outer 1
 # 1px de borda: a janela FOCADA ganha um anel azul vivaco ($accent2);
 # as demais usam a cor do fundo como borda e "somem" no gap escuro,
 # dando o efeito de "sem borda" nas janelas nao focadas.
