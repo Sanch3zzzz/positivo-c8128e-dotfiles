@@ -81,18 +81,30 @@ do_preflight() {
 user_files() {
     echo "$HOME/.config/sway/config"
     local f b
-    for f in "$HERE"/.config/sway/scripts/*; do echo "$HOME/.config/sway/scripts/$(basename "$f")"; done
+    for f in "$HERE"/.config/sway/scripts/*; do
+        [ -f "$f" ] || continue
+        echo "$HOME/.config/sway/scripts/$(basename "$f")"
+    done
     echo "$HOME/.config/waybar/config.jsonc"
     echo "$HOME/.config/waybar/style.css"
-    for f in "$HERE"/.config/waybar/scripts/*; do echo "$HOME/.config/waybar/scripts/$(basename "$f")"; done
+    for f in "$HERE"/.config/waybar/scripts/*; do
+        [ -f "$f" ] || continue
+        echo "$HOME/.config/waybar/scripts/$(basename "$f")"
+    done
     echo "$HOME/.config/mimeapps.list"
     echo "$HOME/.config/qt6ct/qt6ct.conf"
     echo "$HOME/.config/swaylock/config"
     echo "$HOME/.config/swayidle/config"
     echo "$HOME/.config/mako/config"
     echo "$HOME/.config/foot/foot.ini"
-    for f in "$HERE"/.config/systemd/user/*; do echo "$HOME/.config/systemd/user/$(basename "$f")"; done
-    for f in "$HERE"/home/.local/bin/*; do echo "$HOME/.local/bin/$(basename "$f")"; done
+    for f in "$HERE"/.config/systemd/user/*; do
+        [ -f "$f" ] || continue
+        echo "$HOME/.config/systemd/user/$(basename "$f")"
+    done
+    for f in "$HERE"/home/.local/bin/*; do
+        [ -f "$f" ] || continue
+        echo "$HOME/.local/bin/$(basename "$f")"
+    done
 }
 
 root_files() {
@@ -245,6 +257,7 @@ echo "== Configs do usuario =="
 # sway
 backup_copy "$HERE/.config/sway/config" "$HOME/.config/sway/config"
 for f in "$HERE"/.config/sway/scripts/*; do
+    [ -f "$f" ] || continue
     b="$(basename "$f")"
     backup_copy "$f" "$HOME/.config/sway/scripts/$b"
     chmod +x "$HOME/.config/sway/scripts/$b"
@@ -255,6 +268,7 @@ for f in config.jsonc style.css; do
     backup_copy "$HERE/.config/waybar/$f" "$HOME/.config/waybar/$f"
 done
 for f in "$HERE"/.config/waybar/scripts/*; do
+    [ -f "$f" ] || continue
     b="$(basename "$f")"
     backup_copy "$f" "$HOME/.config/waybar/scripts/$b"
     chmod +x "$HOME/.config/waybar/scripts/$b"
@@ -278,12 +292,14 @@ backup_copy "$HERE/.config/foot/foot.ini" "$HOME/.config/foot/foot.ini"
 
 # unidades de usuario (timer do alerta de bateria)
 for f in "$HERE"/.config/systemd/user/*; do
+    [ -f "$f" ] || continue
     b="$(basename "$f")"
     backup_copy "$f" "$HOME/.config/systemd/user/$b"
 done
 
 # scripts do usuario
 for f in "$HERE"/home/.local/bin/*; do
+    [ -f "$f" ] || continue
     b="$(basename "$f")"
     backup_copy "$f" "$HOME/.local/bin/$b"
     chmod +x "$HOME/.local/bin/$b"
