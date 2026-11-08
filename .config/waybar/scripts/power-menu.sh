@@ -10,7 +10,7 @@ BASE_FREQ="$(cat "$GOV/base_frequency" 2>/dev/null || echo $((MAX_FREQ / 2)))"
 
 modes=(performance balanced power-saver)
 names=('Performance' 'Balanceado' 'Economia')
-icons=('\uf0e7' '\uf24e' '\uf186')
+icons=($'\uf0e7' $'\uf24e' $'\uf186')
 
 find_index() {
     local m="$1"

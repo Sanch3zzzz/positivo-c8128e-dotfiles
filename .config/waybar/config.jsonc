@@ -62,12 +62,10 @@
         "tooltip": true
     },
     "cpu": {
-        "format": " {usage}%",
-        "max-length": 15
+        "format": "\uf2db {usage}%"
     },
     "memory": {
-        "format": " {percentage}%",
-        "max-length": 15
+        "format": "\uf538 {percentage}%"
     },
     "backlight": {
         "format": "{percent}% {icon}",
