@@ -62,6 +62,7 @@ row "MOD + Print"       "Print de area (clipboard)"
 row "Tecla Positivo"    "Print de tela inteira (~/Images/Prints)"
 row "Tecla Copilot"     "Abre o opencode"
 
+printf "\n %s(teclas de suspender/desligar do teclado desativadas — use Ctrl+Alt+Del)%s\n" "$c_dim" "$rst"
 printf "\n%s(qualquer tecla fecha)%s\n" "$c_dim" "$rst"
 read -rn1 -s || true
 printf "\033[0m\n"
