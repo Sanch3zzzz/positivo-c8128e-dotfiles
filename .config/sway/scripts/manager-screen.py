@@ -6,6 +6,7 @@
 # Dependencias: gtk3 + python-gobject (ver docs/00-pacotes.md).
 import getpass
 import glob
+import json
 import os
 import socket
 import subprocess
@@ -15,6 +16,10 @@ import time
 import gi
 
 gi.require_version("Gtk", "3.0")
+# Gdk precisa ser pinado em 3.0 ANTES do import: se o Gdk 4.0 estiver
+# disponível, o PyGObject carrega 4.0 e o Gtk 3.0 quebra com
+# "Requiring namespace 'Gdk' version '3.0', but '4.0' is already loaded".
+gi.require_version("Gdk", "3.0")
 from gi.repository import Gdk, GLib, Gtk
 
 # No Wayland/GTK3 o app_id e o "program name"; precisa ser "manager" para
@@ -394,11 +399,54 @@ def execute(action):
         run(["systemctl", "poweroff"])
 
 
+def focused_fullscreen_id():
+    """ID da janela focada se ela estiver em fullscreen, senao None.
+
+    No sway uma janela fullscreen fica ACIMA de janelas normais (e da
+    propria waybar), entao o painel abriria escondido. Desligamos o
+    fullscreen antes de mostrar e religamos ao fechar (em main()).
+    """
+    try:
+        out = subprocess.check_output(
+            ["swaymsg", "-t", "get_tree"],
+            text=True,
+            timeout=2,
+            stderr=subprocess.DEVNULL,
+        )
+        tree = json.loads(out)
+    except (OSError, subprocess.SubprocessError, ValueError):
+        return None
+
+    stack = [tree]
+    while stack:
+        node = stack.pop()
+        if node.get("focused"):
+            return node.get("id") if node.get("fullscreen_mode", 0) else None
+        stack.extend(node.get("nodes", []))
+        stack.extend(node.get("floating_nodes", []))
+    return None
+
+
+def set_fullscreen(con_id, enable):
+    if con_id is None:
+        return
+    state = "enable" if enable else "disable"
+    run(["swaymsg", f"[con_id={con_id}] fullscreen {state}"])
+
+
 def main():
+    fs_id = focused_fullscreen_id()
+    if fs_id is not None:
+        set_fullscreen(fs_id, False)
+        time.sleep(0.15)
+
     manager = Manager()
     Gtk.main()
     if manager.pending:
         execute(manager.pending)
+
+    if fs_id is not None:
+        set_fullscreen(fs_id, True)
 
 
 if __name__ == "__main__":
