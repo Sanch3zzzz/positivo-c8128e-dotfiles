@@ -51,15 +51,26 @@ Comportamento via drop-ins do logind (`/etc/systemd/logind.conf.d/`,
 incluídos no repo):
 
 ```ini
-# power-button.conf
+# power-button.conf — teclas de energia desativadas (nada de suspender/desligar
+# sem querer); as ações seguem nos menus (MOD + Esc, Ctrl + Alt + Delete)
 [Login]
-HandlePowerKey=suspend
+HandlePowerKey=ignore
+HandlePowerKeyLongPress=ignore
+HandleRebootKey=ignore
+HandleRebootKeyLongPress=ignore
+HandleSuspendKey=ignore
+HandleSuspendKeyLongPress=ignore
+HandleHibernateKey=ignore
+HandleHibernateKeyLongPress=ignore
 
 # lid.conf
 [Login]
 HandleLidSwitch=suspend
 HandleLidSwitchExternalPower=suspend
 ```
+
+Aplicar sem reiniciar: `sudo systemctl reload systemd-logind` (o systemd 262
+suporta reload). A tampa continua suspendendo normalmente.
 
 ## 4.4 · Relógio
 

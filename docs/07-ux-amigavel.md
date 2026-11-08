@@ -142,3 +142,10 @@ as ações destrutivas só rodam depois da confirmação.
   position center` + `resize set 720px 580px`.
 - Dependências: `gtk3` e `python-gobject` (`docs/00-pacotes.md` §2).
 - Depois de instalar os pacotes: `swaymsg reload` e `MOD + Esc`.
+- Visual discreto: botões quadrados (`border-radius: 0`) e sem barra de
+  título — `default_floating_border pixel 1` no sway remove a decoração
+  de todas as janelas flutuantes (painel, ajuda e status).
+- Abre mesmo com uma janela em tela cheia: o script desliga o
+  `fullscreen` da janela focada antes de exibir e religa ao fechar.
+- PyGObject novo carrega Gdk 4.0; por isso o script fixa
+  `gi.require_version("Gdk", "3.0")` antes do `import`.
