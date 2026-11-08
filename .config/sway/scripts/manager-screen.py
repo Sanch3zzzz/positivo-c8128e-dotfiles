@@ -73,7 +73,7 @@ button.action {
     background-image: none;
     background-color: #122442;
     border: 1px solid #2f66a8;
-    border-radius: 12px;
+    border-radius: 0;
     padding: 8px 10px;
 }
 button.action:hover {
@@ -109,7 +109,7 @@ button.close {
     background-image: none;
     background-color: #122442;
     border: 1px solid #2f66a8;
-    border-radius: 8px;
+    border-radius: 0;
     color: #8aa2c9;
     font-size: 14px;
 }
@@ -132,7 +132,7 @@ dialog button {
     background-image: none;
     background-color: #122442;
     border: 1px solid #2f66a8;
-    border-radius: 8px;
+    border-radius: 0;
     color: #dfe6f0;
     padding: 6px 14px;
 }
@@ -188,6 +188,9 @@ class Manager:
         self.energy_label = None
 
         self.win = Gtk.Window(title="Gerenciamento")
+        # Sem decoracao do GTK (titlebar): o painel ja tem o proprio X e o
+        # sway desenha a borda de foco. Fica mais simples e no tema escuro.
+        self.win.set_decorated(False)
         self.win.set_wmclass("manager", "manager")
         self.win.set_default_size(720, 580)
         self.win.set_resizable(False)

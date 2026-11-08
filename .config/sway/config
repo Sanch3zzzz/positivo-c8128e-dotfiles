@@ -66,6 +66,10 @@ gaps outer 1
 # as demais usam a cor do fundo como borda e "somem" no gap escuro,
 # dando o efeito de "sem borda" nas janelas nao focadas.
 default_border pixel 1
+# Janelas flutuantes (painel de gerenciamento, ajuda, status) tambem sem
+# titlebar: por padrao o sway usa "normal" nelas, o que desenha uma barra
+# de titulo colorida. 1px de borda deixa quadrado e no tema.
+default_floating_border pixel 1
 
 # Tema - Dark Azul Vibrante
 set $bg      #0a1628
