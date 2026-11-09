@@ -182,10 +182,35 @@ def energy_mode():
     return lines[-1] if lines else "?"
 
 
+def manager_focused():
+    """True se a janela do painel ja tem foco de teclado no sway."""
+    try:
+        out = subprocess.check_output(
+            ["swaymsg", "-t", "get_tree"],
+            text=True,
+            timeout=2,
+            stderr=subprocess.DEVNULL,
+        )
+        tree = json.loads(out)
+    except (OSError, subprocess.SubprocessError, ValueError):
+        return False
+
+    stack = [tree]
+    while stack:
+        node = stack.pop()
+        if node.get("focused"):
+            return node.get("app_id") == "manager"
+        stack.extend(node.get("nodes", []))
+        stack.extend(node.get("floating_nodes", []))
+    return False
+
+
 class Manager:
     def __init__(self):
         self.pending = None
         self.energy_label = None
+        self.first_button = None
+        self.got_focus = False
 
         self.win = Gtk.Window(title="Gerenciamento")
         # Sem decoracao do GTK (titlebar): o painel ja tem o proprio X e o
@@ -233,6 +258,8 @@ class Manager:
             btn, name = self.make_button(icon, text, danger)
             btn.connect("clicked", self.on_clicked, action)
             grid.attach(btn, i % 2, i // 2, 1, 1)
+            if i == 0:
+                self.first_button = btn
             if action == "energy":
                 self.energy_label = name
 
@@ -242,6 +269,30 @@ class Manager:
 
         self.refresh_energy()
         self.win.show_all()
+        self.win.present()
+        # Quando aberto pela waybar (sem token de ativacao), o sway pode
+        # mapear a janela sem dar foco de teclado. Pede o foco explicitamente
+        # e coloca o foco no primeiro botao para Tab/Enter funcionarem.
+        GLib.timeout_add(100, self.focus_window)
+
+    def focus_window(self, attempts=15):
+        if self.got_focus:
+            return False
+        if manager_focused():
+            self.got_focus = True
+            return False
+        subprocess.run(
+            ["swaymsg", '[app_id="manager"] focus'],
+            check=False,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        self.win.present()
+        if self.first_button is not None:
+            self.first_button.grab_focus()
+        if attempts > 0:
+            GLib.timeout_add(100, self.focus_window, attempts - 1)
+        return False
 
     def build_header(self):
         hdr = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
