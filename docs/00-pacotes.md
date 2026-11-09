@@ -67,6 +67,12 @@ sudo pacman -S thunar thunar-archive-plugin foliate vlc mpv imv micro
 paru -S floorp-bin pamac-aur
 ```
 
+### 7.1 · Conversão de ISOs para CHD (opcional, ver `08-chd-conversao.md`)
+
+```bash
+sudo pacman -S mame-tools
+```
+
 ## 8 · Manuseio de arquivos no Thunar (compactados/thumbnails/volumes)
 
 ```bash

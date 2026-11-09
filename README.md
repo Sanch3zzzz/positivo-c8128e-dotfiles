@@ -46,7 +46,8 @@ mas quase tudo reaproveitável em qualquer notebook com touchscreen.
 │   ├── 04-hardware-extras.md    # BT, energia, relógio, teclas extras
 │   ├── 05-apps.md               # apps, MIME e wallpapers
 │   ├── 06-troubleshooting.md    # FAQ: gestos, audio, brilho, rotacao...
-│   └── 07-ux-amigavel.md        # ajuda, boas-vindas, backup, menu inicial
+│   ├── 07-ux-amigavel.md        # ajuda, boas-vindas, backup, menu inicial
+│   └── 08-chd-conversao.md      # ISOs de PS1/PS2/PSP -> CHD
 ├── .config/                   # configs do usuário (sway, waybar, mako, MIME)
 ├── home/                      # scripts do $HOME (~/.local/bin)
 └── root/                      # arquivos de sistema (referência)
